@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "sha256",
+  "lockedAt": "2026-07-11T14:56:55.342Z",
+  "references": [
+    {
+      "id": "voxel-garden-desktop-1536x1024",
+      "file": "design/reference/voxel-garden-desktop-1536x1024.png",
+      "sha256": "12b23a5717a98ea07f2c10368c14f25fea6d1bc9e800c22a7534b0c90e3bfdfd",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "viewport": {
+        "width": 1536,
+        "height": 1024
+      },
+      "state": "settled-gameplay",
+      "section": "desktop-gameplay"
+    }
+  ]
+}

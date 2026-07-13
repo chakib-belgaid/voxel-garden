@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "baseUrl": "http://127.0.0.1:4173",
+  "capture": {
+    "waitUntil": "networkidle",
+    "settleMs": 1800,
+    "colorScheme": "dark",
+    "reducedMotion": "reduce",
+    "deviceScaleFactor": 1
+  },
+  "thresholds": {
+    "channelDelta": 24,
+    "p1MismatchPercent": 15,
+    "p2MismatchPercent": 2,
+    "p3MismatchPercent": 0.25
+  },
+  "references": [
+    {
+      "id": "voxel-garden-desktop-1536x1024",
+      "file": "design/reference/voxel-garden-desktop-1536x1024.png",
+      "url": "/?qa=reference",
+      "section": "desktop-gameplay",
+      "state": "settled-gameplay",
+      "readySelector": "[data-reference-mode=\"true\"]",
+      "viewport": {
+        "width": 1536,
+        "height": 1024
+      },
+      "fullPage": false
+    }
+  ]
+}

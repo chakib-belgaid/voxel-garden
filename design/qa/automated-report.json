@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-11T16:15:28.022Z",
+  "baseUrl": "http://127.0.0.1:4190",
+  "thresholds": {
+    "channelDelta": 24,
+    "p1MismatchPercent": 15,
+    "p2MismatchPercent": 2,
+    "p3MismatchPercent": 0.25
+  },
+  "note": "Automated pixel difference is triage evidence and must be followed by direct visual inspection.",
+  "results": [
+    {
+      "id": "voxel-garden-desktop-1536x1024",
+      "url": "http://127.0.0.1:4190/?qa=reference",
+      "reference": "design/reference/voxel-garden-desktop-1536x1024.png",
+      "actual": "design/qa/actual/voxel-garden-desktop-1536x1024.png",
+      "diff": "design/qa/diff/voxel-garden-desktop-1536x1024.png",
+      "viewport": {
+        "width": 1536,
+        "height": 1024
+      },
+      "state": "settled-gameplay",
+      "dimensionsMatch": true,
+      "mismatchPercent": 51.6434,
+      "severity": "P1",
+      "consoleErrors": [],
+      "runtimeErrors": [],
+      "requestFailures": [],
+      "imageDimensions": {
+        "reference": {
+          "width": 1536,
+          "height": 1024
+        },
+        "actual": {
+          "width": 1536,
+          "height": 1024
+        }
+      }
+    }
+  ]
+}

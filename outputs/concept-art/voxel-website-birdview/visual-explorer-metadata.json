@@ -1,0 +1,14 @@
+{
+  "workflow": "scene-explorer",
+  "subjectKind": "experience",
+  "subject": "Voxel Garden bird's-eye website island",
+  "count": 5,
+  "stage": "concept-art exploration",
+  "nextStage": "select one direction, define exact tile grid, then author the bitmap map",
+  "excludedSubjects": [
+    "player character",
+    "robots",
+    "drones",
+    "particle effects"
+  ]
+}

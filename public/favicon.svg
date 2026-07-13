@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Systems Garden sprout bot">
+  <rect width="64" height="64" rx="12" fill="#020b0e"/>
+  <path d="M32 17c0-7 5-11 13-11-1 8-5 12-13 12M32 17C30 10 25 7 18 8c1 7 6 11 14 10" fill="#9bd42b" stroke="#245d17" stroke-width="3"/>
+  <rect x="14" y="18" width="36" height="30" rx="6" fill="#d9d0b4" stroke="#756238" stroke-width="4"/>
+  <rect x="20" y="25" width="24" height="14" rx="3" fill="#041317"/>
+  <path d="M25 32h4m6 0h4" stroke="#70d8df" stroke-width="3" stroke-linecap="round"/>
+  <path d="M21 50v6m22-6v6" stroke="#756238" stroke-width="5" stroke-linecap="round"/>
+</svg>

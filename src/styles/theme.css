@@ -1,0 +1,141 @@
+@import '@fontsource/jersey-10/latin-400.css';
+@import '@fontsource/ibm-plex-mono/latin-400.css';
+@import '@fontsource/ibm-plex-mono/latin-500.css';
+@import '@fontsource/ibm-plex-mono/latin-600.css';
+
+:root {
+  color-scheme: dark;
+  --font-display: 'Jersey 10', 'Courier New', monospace;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+  --void-950: #020b0e;
+  --void-900: #031015;
+  --panel-950: rgba(2, 12, 15, 0.97);
+  --panel-900: #041317;
+  --panel-850: #05171b;
+  --panel-800: #071a1d;
+  --panel-700: #0a2326;
+  --brass-900: #211e12;
+  --brass-800: #2b2818;
+  --brass-700: #3b351d;
+  --brass-600: #554a28;
+  --brass-400: #756238;
+  --brass-300: #9a8045;
+  --cream-100: #e7ded0;
+  --cream-200: #d0c8bb;
+  --cream-400: #aaa093;
+  --cream-600: #746d64;
+  --brand-gold: #e7a43d;
+  --lime-300: #b9ec44;
+  --lime-400: #9bd42b;
+  --lime-500: #72a817;
+  --leaf-700: #245d17;
+  --leaf-500: #6fa523;
+  --cyan-200: #70d8df;
+  --cyan-400: #29b8c7;
+  --cyan-600: #116f7b;
+  --water-600: #006b79;
+  --purple-500: #8537da;
+  --orange-500: #dd8615;
+  --red-500: #c74726;
+  --red-400: #ec6b4a;
+  --outline-focus: #f4cf59;
+  --shadow-black: rgba(0, 0, 0, 0.76);
+  --scanline: rgba(255, 255, 255, 0.018);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background: var(--void-950);
+  color: var(--cream-100);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--outline-focus);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--lime-400);
+  color: var(--void-950);
+}
+
+.game-ui.is-high-contrast {
+  --panel-950: #00090b;
+  --panel-900: #000d11;
+  --panel-800: #00181d;
+  --brass-700: #8d773e;
+  --brass-400: #d3b763;
+  --cream-100: #ffffff;
+  --cream-400: #dedede;
+  --lime-400: #c5ff43;
+  --cyan-400: #55efff;
+}
+
+.game-ui.is-high-contrast button,
+.game-ui.is-high-contrast input {
+  outline-color: currentColor;
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --brass-400: #bca15d;
+    --cream-100: #fff;
+    --cream-400: #d8d5cf;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.game-ui.is-reduced-motion *,
+.game-ui.is-reduced-motion *::before,
+.game-ui.is-reduced-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  scroll-behavior: auto !important;
+  transition-duration: 0.001ms !important;
+}

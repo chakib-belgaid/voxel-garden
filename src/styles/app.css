@@ -1,0 +1,118 @@
+.app-shell,
+.world-layer,
+.world-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.app-shell {
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--void-950);
+}
+
+.world-layer {
+  z-index: 0;
+}
+
+.world-canvas {
+  display: block;
+  outline: none;
+  image-rendering: pixelated;
+}
+
+.game-ui {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.game-ui button,
+.game-ui a,
+.game-ui input,
+.game-ui select,
+.game-ui textarea,
+.game-ui [role="dialog"],
+.game-ui .metal-panel,
+.game-ui .objective-chip,
+.game-ui .interaction-prompt,
+.game-ui .utility-buttons,
+.game-ui .touch-controls,
+.game-ui .mobile-hud {
+  pointer-events: auto;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 1000;
+  top: 8px;
+  left: 8px;
+  padding: 10px 14px;
+  transform: translateY(-160%);
+  background: var(--lime-400);
+  color: var(--void-950);
+  font: 600 14px/1 var(--font-mono);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.webgl-fallback {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: 50%;
+  width: min(520px, calc(100% - 32px));
+  padding: 28px;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.webgl-fallback > svg {
+  width: 42px;
+  height: 42px;
+  color: var(--brand-gold);
+}
+
+.webgl-fallback > span {
+  display: block;
+  margin-top: 12px;
+  color: var(--lime-400);
+  letter-spacing: 0.12em;
+}
+
+.webgl-fallback h1 {
+  margin: 8px 0;
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 400;
+}
+
+.webgl-fallback p {
+  color: var(--cream-400);
+  line-height: 1.6;
+}
+
+body.qa-reference .objective-chip,
+body.qa-reference .utility-buttons,
+body.qa-reference .interaction-prompt,
+body.qa-reference .mobile-hud,
+body.qa-reference .touch-controls {
+  display: none !important;
+}

@@ -1,0 +1,49 @@
+{
+  "brief": "Five bird's-eye concept-art directions for turning the voxel island into a physically built portfolio website.",
+  "format": "landscape 16:9",
+  "camera": "near-perfect orthographic bird's-eye view",
+  "referenceImages": [
+    "design/assets/source/voxel-garden-key-art.png",
+    "design/qa/actual/voxel-garden-desktop-1536x1024.png"
+  ],
+  "sharedConstraints": [
+    "Preserve the current dark eco-tech voxel palette, cyan water and displays, lime foliage, cream stone, brass details, and dense garden character.",
+    "The island itself is the website; do not add floating HUD panels or conventional interface overlays.",
+    "Use crisp modular tile geometry that can later be translated into a bitmap map.",
+    "Short labels are constructed physically from terrain tiles, paths, water, crop beds, lights, and low voxel objects.",
+    "No people, player character, robots, drones, creatures, or particle effects.",
+    "Do not imitate Minecraft; retain the authored compact voxel-diorama style of the references."
+  ],
+  "concepts": [
+    {
+      "id": "01-grid-homepage",
+      "title": "The Garden Grid Homepage",
+      "intent": "The clearest website read: one rectangular island composed like a polished desktop portfolio homepage.",
+      "prompt": "Using the supplied voxel-garden references for material language and palette, create landscape 16:9 concept art of the same eco-tech voxel world transformed into a website that only becomes obvious from a near-perfect orthographic bird's-eye view. A rectangular floating island is laid out as a precise portfolio homepage: a thin northern navigation strip built from stone and light tiles spelling the short labels HOME, WORK, ABOUT, BLOG, CONTACT; a large left hero field whose lime hedge and cream path tiles form CHAKIB with the smaller cyan tile subtitle AI GARDEN; four distinct project-card gardens on the right made from crop beds, solar tiles, water channels, and machinery; a stats strip and a clear contact dock along the southern edge. The interface is entirely physical terrain and objects, never a floating HUD. Make every region align to a clean modular grid suitable for later bitmap conversion, with one-tile borders and readable negative space. Preserve deep navy void, mossy greens, cream stone, aged brass, cyan water and light, purple and orange accents, crisp voxel silhouettes, compact shadows, richly authored diorama quality. No characters, people, robots, drones, creatures, particles, floating panels, menus, speech bubbles, or long body text."
+    },
+    {
+      "id": "02-typographic-terraces",
+      "title": "The Typographic Terraces",
+      "intent": "The landscape itself becomes a bold identity mark, with typography carrying the composition.",
+      "prompt": "Using the supplied voxel-garden references for material language and palette, create landscape 16:9 concept art of a lush irregular floating voxel island transformed into monumental land-art typography, viewed from a near-perfect orthographic bird's-eye camera. Across the center, enormous crisp block letters spelling CHAKIB are physically built from alternating cream stone paths, luminous cyan water trenches, dark soil, lime hedges, and low crop voxels. Below it, a smaller line of terrace tiles spells AI SYSTEMS. Around the central wordmark, five compact garden districts act like website sections and are marked with short physical tile labels: WORK, ABOUT, LAB, NOTES, CONTACT. Use elevation terraces, water cuts, tree clusters, solar fields, greenhouse shapes, and brass machinery to frame the text without obscuring it. The result must feel like an organic island first and a sophisticated portfolio identity second, yet instantly readable when zoomed out. Keep edges and letterforms on a consistent tile grid for bitmap conversion. Preserve deep navy void, dense mossy ecology, cream stone, cyan glow and water, brass, purple and orange accents, crisp premium voxel-diorama detail. No characters, people, robots, drones, creatures, particles, floating UI, cards, speech bubbles, or illegible filler text."
+    },
+    {
+      "id": "03-scroll-path",
+      "title": "The Living Scroll Path",
+      "intent": "A top-to-bottom website narrative encoded as a walkable route through the island.",
+      "prompt": "Using the supplied voxel-garden references for material language and palette, create landscape 16:9 concept art of a long floating eco-tech voxel island whose geography behaves like a vertically scrolling portfolio page, seen from a near-perfect orthographic bird's-eye view. A continuous cream-stone path and bright cyan stream flow from the northern hero section to the southern contact section, forming a strong page-reading axis. At the north, terrain tiles spell CHAKIB beside a compact voxel laboratory hero landmark. The route passes a WORK gallery of four evenly sized project plots, an ABOUT timeline formed from stepping stones and planted milestones, a LAB section of experimental domes and solar machinery, and finally a CONTACT pier whose tiles form a clear arrow and the word HELLO. Short section labels are physically formed from paths, hedges, water, crops, and lights; no text floats above the world. Use section spacing, one-tile rules, crossings, and deliberate empty ground so the whole island reads as a designed page when zoomed out while remaining explorable on foot. Make the geometry modular and bitmap-friendly. Preserve deep navy void, moss greens, cream stone, cyan water and glow, aged brass, purple and orange accents, dense authored voxel quality. No characters, people, robots, drones, creatures, particle effects, HUD panels, menus, speech bubbles, or long paragraphs."
+    },
+    {
+      "id": "04-portfolio-archipelago",
+      "title": "The Portfolio Archipelago",
+      "intent": "Each site section becomes a distinct island-page connected through visible navigation bridges.",
+      "prompt": "Using the supplied voxel-garden references for material language and palette, create landscape 16:9 concept art of a portfolio website expressed as a connected voxel archipelago, viewed from a near-perfect orthographic bird's-eye camera. Five deliberately shaped floating garden islands sit in a balanced desktop composition and are linked by narrow stone-and-light bridges like navigation lines. The largest central HOME island contains a terrain-built CHAKIB wordmark and signature eco-lab. A western WORK island is divided into four clean project plots. A northern ABOUT island uses tree rings and a stepped timeline. An eastern LAB island contains greenhouse domes, solar fields, water machinery, and crop experiments. A southern CONTACT island ends in a welcoming dock and a cyan tile envelope symbol. HOME, WORK, ABOUT, LAB, CONTACT are short block labels physically assembled from cream, cyan, lime, and dark tiles on each island, with no floating text. Ensure the archipelago still reads as one coherent, polished website layout from above, with obvious hierarchy and bitmap-friendly modular tile boundaries. Preserve dark navy void, lush moss greens, cream stone, luminous cyan water, aged brass and restrained purple-orange accents, crisp premium voxel diorama detail. No characters, people, robots, drones, creatures, particles, floating UI panels, menus, or body copy."
+    },
+    {
+      "id": "05-terminal-dashboard",
+      "title": "The Terminal Garden Dashboard",
+      "intent": "The existing dark terminal UI becomes a physical neon landscape rather than an overlay.",
+      "prompt": "Using both supplied references, combine the eco-tech voxel island's materials with the dense terminal-style composition of the current portfolio interface. Create landscape 16:9 concept art from a near-perfect orthographic bird's-eye view: one rectangular floating island is physically landscaped like a dark terminal dashboard. A thin tile-built header rail spans the north; a large left hero zone contains CHAKIB in cream and gold ground tiles with AI SYSTEMS in cyan; the center is a rich garden-world preview built from paths, crops, water, domes, solar panels, and turbines; four compact project modules align along the lower center; a stats garden sits lower left; a cultivation/contact garden sits lower right; a narrow footer path closes the southern edge. Brass border tiles, dark soil surfaces, cyan canal keylines, lime status crops, and tiny voxel lights create the panel framing, but every panel is walkable terrain, never an overlay. Keep a rigorous modular bitmap grid, crisp dividers, clear large-scale reading, and enough natural vegetation to remain a living island. Preserve deep navy void, cream, aged brass, lime, cyan, restrained purple and orange, premium authored voxel detail and compact shadows. No characters, people, robots, drones, creatures, particles, floating HUD, conventional glass panels, speech bubbles, or long unreadable copy."
+    }
+  ]
+}

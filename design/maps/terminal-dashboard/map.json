@@ -1,0 +1,124 @@
+{
+  "name": "Terminal Garden Dashboard",
+  "version": 1,
+  "width": 128,
+  "height": 72,
+  "tileSize": 2,
+  "elevationStep": 0.45,
+  "originCell": { "column": 64, "row": 36 },
+  "reference": "reference.png",
+  "layers": {
+    "surface": "surface.png",
+    "elevation": "elevation.png",
+    "props": "props.png",
+    "zones": "zones.png"
+  },
+  "palettes": {
+    "surface": {
+      "void": "#020b0e",
+      "grass": "#295419",
+      "grass-mid": "#3e6d1d",
+      "soil": "#3b2a12",
+      "trail": "#67451c",
+      "stone": "#777558",
+      "cream": "#d9d0b5",
+      "brass": "#756238",
+      "cyan": "#25c8d1",
+      "lime": "#9bd42b",
+      "water": "#087787",
+      "charcoal": "#10191a"
+    },
+    "elevation": {
+      "level-0": "#000000",
+      "level-1": "#242424",
+      "level-2": "#494949",
+      "level-3": "#6d6d6d",
+      "level-4": "#929292",
+      "level-5": "#b6b6b6",
+      "level-6": "#dbdbdb",
+      "level-7": "#ffffff"
+    },
+    "props": {
+      "none": "#000000",
+      "tree": "#2f6b18",
+      "rock": "#9d9870",
+      "flowers": "#dc5a8a",
+      "crops": "#6f8b22",
+      "hedge": "#173e13",
+      "lamp": "#f1e9d4",
+      "solar": "#0b3766",
+      "dome": "#18a8b4",
+      "turbine": "#a48746",
+      "sign": "#8537da"
+    },
+    "zones": {
+      "none": "#000000",
+      "home": "#d9d0b5",
+      "about": "#9bd42b",
+      "projects": "#756238",
+      "blog": "#dc5a8a",
+      "experiments": "#25c8d1",
+      "contact": "#dd8615",
+      "stats": "#9d9870",
+      "cultivation": "#6f8b22",
+      "wattch": "#a3ff00",
+      "whispbook": "#8537da",
+      "agent-commerce": "#18a8b4",
+      "dev-tools": "#c74726"
+    }
+  },
+  "nonWalkableSurfaces": ["void", "water"],
+  "solidProps": ["tree", "rock", "hedge", "lamp", "solar", "dome", "turbine"],
+  "layout": {
+    "header": { "minColumn": 6, "maxColumn": 121, "minRow": 5, "maxRow": 10 },
+    "hero": { "minColumn": 6, "maxColumn": 48, "minRow": 13, "maxRow": 43 },
+    "gardenPreview": { "minColumn": 51, "maxColumn": 121, "minRow": 13, "maxRow": 43 },
+    "stats": { "minColumn": 6, "maxColumn": 28, "minRow": 46, "maxRow": 65 },
+    "projects": { "minColumn": 31, "maxColumn": 88, "minRow": 46, "maxRow": 65 },
+    "cultivationContact": { "minColumn": 92, "maxColumn": 121, "minRow": 46, "maxRow": 65 },
+    "footer": { "minColumn": 6, "maxColumn": 121, "minRow": 67, "maxRow": 68 }
+  },
+  "anchors": {
+    "spawn": { "column": 64, "row": 39 },
+    "gardenHeart": { "column": 64, "row": 39 },
+    "systems": {
+      "wattch": { "column": 37, "row": 58 },
+      "whispbook": { "column": 51, "row": 58 },
+      "agent-commerce": { "column": 66, "row": 58 },
+      "dev-tools": { "column": 81, "row": 58 }
+    },
+    "labs": {
+      "helio-metrics": { "column": 60, "row": 20 },
+      "mossglass": { "column": 78, "row": 20 },
+      "courier-robotics": { "column": 60, "row": 33 },
+      "local-systems": { "column": 78, "row": 33 }
+    },
+    "bookPickup": { "column": 47, "row": 55 },
+    "libraryDropoff": { "column": 51, "row": 58 },
+    "waterRefill": { "column": 84, "row": 22 },
+    "flowerBeds": [
+      { "column": 69, "row": 29 },
+      { "column": 76, "row": 29 },
+      { "column": 83, "row": 29 }
+    ]
+  },
+  "footprints": {
+    "systems": { "halfWidthCells": 3, "halfDepthCells": 3 },
+    "labs": { "halfWidthCells": 2, "halfDepthCells": 2 },
+    "spawn": { "halfWidthCells": 2, "halfDepthCells": 2 }
+  },
+  "sections": [
+    { "id": "home", "label": "Home", "bounds": { "minColumn": 6, "maxColumn": 27, "minRow": 5, "maxRow": 10 }, "action": { "kind": "open-drawer", "drawer": "profile" } },
+    { "id": "blog", "label": "Field log", "bounds": { "minColumn": 76, "maxColumn": 91, "minRow": 5, "maxRow": 10 }, "action": { "kind": "open-field-log" } },
+    { "id": "about", "label": "About", "bounds": { "minColumn": 6, "maxColumn": 48, "minRow": 13, "maxRow": 43 }, "action": { "kind": "open-drawer", "drawer": "profile" } },
+    { "id": "experiments", "label": "Experiments and labs", "bounds": { "minColumn": 51, "maxColumn": 121, "minRow": 13, "maxRow": 43 }, "action": { "kind": "open-drawer", "drawer": "cultivation" } },
+    { "id": "stats", "label": "System stats", "bounds": { "minColumn": 6, "maxColumn": 28, "minRow": 46, "maxRow": 65 }, "action": { "kind": "open-drawer", "drawer": "stats" } },
+    { "id": "projects", "label": "Projects", "bounds": { "minColumn": 31, "maxColumn": 88, "minRow": 46, "maxRow": 50 }, "action": { "kind": "open-drawer", "drawer": "projects" } },
+    { "id": "wattch", "label": "Wattch", "bounds": { "minColumn": 31, "maxColumn": 44, "minRow": 52, "maxRow": 65 }, "action": { "kind": "open-project", "projectId": "wattch" } },
+    { "id": "whispbook", "label": "Whispbook", "bounds": { "minColumn": 46, "maxColumn": 59, "minRow": 52, "maxRow": 65 }, "action": { "kind": "open-project", "projectId": "whispbook" } },
+    { "id": "agent-commerce", "label": "Agent Commerce", "bounds": { "minColumn": 61, "maxColumn": 74, "minRow": 52, "maxRow": 65 }, "action": { "kind": "open-project", "projectId": "agent-commerce" } },
+    { "id": "dev-tools", "label": "Dev Tools", "bounds": { "minColumn": 76, "maxColumn": 88, "minRow": 52, "maxRow": 65 }, "action": { "kind": "open-project", "projectId": "dev-tools" } },
+    { "id": "cultivation", "label": "Cultivation", "bounds": { "minColumn": 92, "maxColumn": 106, "minRow": 46, "maxRow": 65 }, "action": { "kind": "open-drawer", "drawer": "cultivation" } },
+    { "id": "contact", "label": "Contact", "bounds": { "minColumn": 108, "maxColumn": 121, "minRow": 46, "maxRow": 65 }, "action": { "kind": "open-drawer", "drawer": "contact" } }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "referencesLocked": true,
+  "designExtraction": "complete",
+  "assetProduction": "complete",
+  "sections": [
+    {
+      "id": "desktop-gameplay",
+      "status": "in_progress",
+      "referenceIds": [
+        "voxel-garden-desktop-1536x1024"
+      ]
+    }
+  ],
+  "qa": {
+    "reviewedReferenceIds": [
+      "voxel-garden-desktop-1536x1024"
+    ],
+    "openFindings": [
+      {
+        "id": "VF-002",
+        "severity": "P1",
+        "referenceId": "voxel-garden-desktop-1536x1024",
+        "description": "The required pixel-art-to-live-voxel conversion produces a 51.6434% raw pixel mismatch; strict gating needs an approved voxel gameplay reference."
+      }
+    ],
+    "finalResult": "blocked"
+  }
+}
