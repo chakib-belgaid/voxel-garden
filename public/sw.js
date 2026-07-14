@@ -1,4 +1,5 @@
-const CACHE_NAME = "systems-garden-v3";
+const CACHE_NAME = "systems-garden-v4";
+const GARDEN_SHELL = "/garden/index.html";
 const STATIC_SHELL = ["/favicon.svg", "/assets/generated/voxel-garden-key-art.jpg"];
 
 const localPath = (value, base = self.location.origin) => {
@@ -22,13 +23,13 @@ const referencedPaths = (source, base) => {
 
 async function precacheAppShell() {
   const cache = await caches.open(CACHE_NAME);
-  const indexResponse = await fetch("/index.html", { cache: "reload" });
+  const indexResponse = await fetch(GARDEN_SHELL, { cache: "reload" });
   if (!indexResponse.ok) throw new Error("Unable to fetch the application shell.");
 
   const html = await indexResponse.clone().text();
   await Promise.all([
-    cache.put("/", indexResponse.clone()),
-    cache.put("/index.html", indexResponse.clone()),
+    cache.put("/garden", indexResponse.clone()),
+    cache.put(GARDEN_SHELL, indexResponse.clone()),
   ]);
 
   const firstPass = [...new Set([...STATIC_SHELL, ...referencedPaths(html, self.location.origin)])];
@@ -73,7 +74,7 @@ self.addEventListener("fetch", (event) => {
           void caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
           return response;
         })
-        .catch(() => caches.match("/index.html"))
+        .catch(() => caches.match(GARDEN_SHELL))
     );
     return;
   }

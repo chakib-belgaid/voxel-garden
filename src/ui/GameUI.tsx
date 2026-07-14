@@ -68,6 +68,7 @@ import type {
   WebsiteSection,
   WebsiteSectionId,
 } from '../game/world/map/schema';
+import { getGardenCaseStudyPath } from '../garden/caseStudyLinks';
 import '../styles/theme.css';
 import '../styles/ui.css';
 
@@ -357,34 +358,46 @@ function ProjectCard({
   onOpen: (id: ProjectId) => void;
 }) {
   const Icon = project.icon;
+  const caseStudyPath = getGardenCaseStudyPath(project.id);
+  const gardenAction = restored ? 'EXPLORE SYSTEM' : 'PLAY CHALLENGE';
   return (
-    <button
-      type="button"
+    <article
       className={`project-card ${restored ? 'is-restored' : ''}`}
       style={{ '--project-accent': project.accent } as CSSProperties}
-      onClick={() => onOpen(project.id)}
-      aria-label={`${restored ? 'Review restored' : 'Open'} ${project.title} project`}
     >
-      <span className="project-card__title">
-        <Icon aria-hidden="true" /> {project.title}
-      </span>
-      <span className="project-card__description">{project.description}</span>
-      <span className="project-card__signal" aria-hidden="true">
-        {restored ? (
-          <>
-            <CheckCircle2 /> RESTORED
-          </>
-        ) : project.id === 'whispbook' ? (
-          <span className="waveform" />
-        ) : project.id === 'wattch' ? (
-          <span className="sparkline">⌁╱╲╱⌁╲</span>
-        ) : project.id === 'agent-commerce' ? (
-          <Bot />
-        ) : (
-          <Terminal />
-        )}
-      </span>
-    </button>
+      <button
+        className="project-card__garden-action"
+        type="button"
+        onClick={() => onOpen(project.id)}
+        aria-label={`${gardenAction}: ${project.title}`}
+      >
+        <span className="project-card__title">
+          <Icon aria-hidden="true" /> {project.title}
+        </span>
+        <span className="project-card__description">{project.description}</span>
+        <span className="project-card__signal" aria-hidden="true">
+          {restored ? (
+            <>
+              <CheckCircle2 /> RESTORED
+            </>
+          ) : project.id === 'whispbook' ? (
+            <span className="waveform" />
+          ) : project.id === 'wattch' ? (
+            <span className="sparkline">⌁╱╲╱⌁╲</span>
+          ) : project.id === 'agent-commerce' ? (
+            <Bot />
+          ) : (
+            <Terminal />
+          )}
+        </span>
+        <span className="project-card__action-label">{gardenAction}</span>
+      </button>
+      {caseStudyPath && (
+        <a className="project-card__case-link" href={caseStudyPath}>
+          READ FULL CASE STUDY <BookOpen aria-hidden="true" />
+        </a>
+      )}
+    </article>
   );
 }
 
@@ -557,6 +570,9 @@ function ProgressHUD({
         <button type="button" onClick={onPause} aria-label="Pause game" title="Pause (P)">
           <Pause />
         </button>
+        <a className="portfolio-action" href="/" aria-label="Portfolio" title="Return to portfolio">
+          <ArrowLeft aria-hidden="true" /> <span>PORTFOLIO</span>
+        </a>
       </div>
     </>
   );
@@ -634,6 +650,9 @@ function MobileHud({
         <button type="button" onClick={onOpenLog} aria-label="Field log">
           <BookOpen /> Field log
         </button>
+        <a href="/" aria-label="Portfolio">
+          <ArrowLeft aria-hidden="true" /> Portfolio
+        </a>
       </div>
     </div>
   );
@@ -670,6 +689,7 @@ function BirdViewHUD({
           <Pause aria-hidden="true" /> PAUSE
         </button>
         <button
+          className="bird-return-action"
           type="button"
           onClick={onReturn}
           aria-label="Return to garden exploration"
@@ -678,6 +698,9 @@ function BirdViewHUD({
         >
           <ArrowDown aria-hidden="true" /> RETURN TO GARDEN
         </button>
+        <a className="bird-portfolio-action" href="/" aria-label="Portfolio">
+          <ArrowLeft aria-hidden="true" /> PORTFOLIO
+        </a>
       </div>
     </section>
   );
@@ -922,6 +945,9 @@ function TitleScreen({
           <button className="icon-text-button" type="button" onClick={onSettings} aria-label="Settings">
             <Settings aria-hidden="true" /> SETTINGS
           </button>
+          <a className="icon-text-button" href="/" aria-label="Portfolio">
+            <ArrowLeft aria-hidden="true" /> PORTFOLIO
+          </a>
         </div>
         <div className="title-controls" aria-label="Game controls">
           <span><kbd>WASD</kbd> MOVE</span>
@@ -1216,6 +1242,7 @@ function ProjectDialog({
 }) {
   const project = PROJECTS.find((item) => item.id === projectId) ?? PROJECTS[0];
   const Icon = project.icon;
+  const caseStudyPath = getGardenCaseStudyPath(project.id);
   const restore = (answer: unknown) => onRestore(project.id, answer);
   return (
     <DialogFrame
@@ -1232,6 +1259,11 @@ function ProjectDialog({
           <p>{project.objective}</p>
         </div>
       </div>
+      {caseStudyPath && (
+        <a className="project-dialog__case-link" href={caseStudyPath}>
+          <BookOpen aria-hidden="true" /> READ FULL CASE STUDY
+        </a>
+      )}
       {restored ? (
         <div className="restored-review">
           <CheckCircle2 aria-hidden="true" />
@@ -1369,6 +1401,7 @@ function PauseMenu({
         <button className="pixel-button pixel-button--primary" type="button" onClick={onResume}><Play /> RESUME GARDEN</button>
         <button className="pixel-button" type="button" onClick={onFieldLog} aria-label="Field log"><BookOpen /> FIELD LOG</button>
         <button className="pixel-button" type="button" onClick={onSettings} aria-label="Settings"><Settings /> SETTINGS</button>
+        <a className="pixel-button" href="/" aria-label="Portfolio"><ArrowLeft /> PORTFOLIO</a>
         <button className="icon-text-button danger-link" type="button" onClick={onReset}><RotateCcw /> RESET PROGRESS</button>
       </div>
       <p className="pause-hint"><kbd>ESC</kbd> RESUME</p>
@@ -1425,6 +1458,7 @@ function CompletionScreen({ onContinue, onReset }: { onContinue: () => void; onR
         </div>
         <div className="ending-actions">
           <button className="pixel-button pixel-button--primary" type="button" onClick={onContinue} autoFocus><Sprout /> WALK THE RESTORED GARDEN</button>
+          <a className="pixel-button" href="/" aria-label="Portfolio"><ArrowLeft /> PORTFOLIO</a>
           <button className="icon-text-button" type="button" onClick={onReset}><RefreshCcw /> PLAY AGAIN</button>
         </div>
       </section>
@@ -1677,12 +1711,14 @@ export function GameUI() {
   if (phase === 'title') {
     return (
       <div className={rootClass} data-testid="game-ui" data-world-input={worldInputBlocked ? 'blocked' : 'enabled'}>
-        <TitleScreen
-          hasSave={hasSave}
-          onNew={hasSave ? () => setShowReset(true) : beginNewGame}
-          onContinue={continueGame}
-          onSettings={() => setShowSettings(true)}
-        />
+        {!showReset && (
+          <TitleScreen
+            hasSave={hasSave}
+            onNew={hasSave ? () => setShowReset(true) : beginNewGame}
+            onContinue={continueGame}
+            onSettings={() => setShowSettings(true)}
+          />
+        )}
         {showSettings && <SettingsPanel settings={settings} onChange={setSettings} onClose={() => setShowSettings(false)} />}
         {showReset && <ResetConfirm onConfirm={confirmNewGame} onCancel={() => setShowReset(false)} />}
       </div>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title description">
+  <title id="title">Wattch deterministic test daemon transcript</title>
+  <desc id="description">Exact terminal output from the checked-in deterministic laptop scenario, explicitly not a hardware energy measurement.</desc>
+  <rect width="1600" height="1000" rx="28" fill="#07171f"/>
+  <rect x="1" y="1" width="1598" height="998" rx="27" fill="none" stroke="#1f4b55" stroke-width="2"/>
+  <circle cx="48" cy="44" r="10" fill="#e55b4f"/>
+  <circle cx="80" cy="44" r="10" fill="#dfad3d"/>
+  <circle cx="112" cy="44" r="10" fill="#8dad20"/>
+  <text x="800" y="52" fill="#8faeb5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="22" text-anchor="middle">wattch-core / deterministic protocol trace</text>
+  <foreignObject x="36" y="82" width="1528" height="882">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="color:#cae9e7;font:20px/1.48 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-all;"><span style="color:#9fd638">$ ./target/debug/wattch-testd \</span>
+<span style="color:#9fd638">    --scenario examples/scenarios/laptop_cpu_gpu_nested.json \</span>
+<span style="color:#9fd638">    --dry-run</span>
+<span style="color:#dfad3d"># scenario: laptop_cpu_gpu_nested_v0
+# node: local-dev
+# sources: 6</span>
+{"run_id":"run-det-001","node_id":"local-dev","batch_sequence_no":0,"samples":[{"source_id":1,"sequence_no":0,"monotonic_ns":0,"value":{"type":"f64","value":1000.0}},{"source_id":2,"sequence_no":0,"monotonic_ns":0,"value":{"type":"f64","value":320.0}},{"source_id":3,"sequence_no":0,"monotonic_ns":0,"value":{"type":"f64","value":200.0}},{"source_id":4,"sequence_no":0,"monotonic_ns":0,"value":{"type":"f64","value":24.0}},{"source_id":5,"sequence_no":0,"monotonic_ns":0,"value":{"type":"f64","value":80.0}},{"source_id":6,"sequence_no":0,"monotonic_ns":0,"value":{"type":"f64","value":10000.0}}]}
+{"run_id":"run-det-001","node_id":"local-dev","batch_sequence_no":1,"samples":[{"source_id":1,"sequence_no":1,"monotonic_ns":10000000,"value":{"type":"f64","value":1000.42}},{"source_id":2,"sequence_no":1,"monotonic_ns":10000000,"value":{"type":"f64","value":320.13}},{"source_id":3,"sequence_no":1,"monotonic_ns":10000000,"value":{"type":"f64","value":200.05}},{"source_id":4,"sequence_no":1,"monotonic_ns":10000000,"value":{"type":"f64","value":24.25}},{"source_id":5,"sequence_no":1,"monotonic_ns":10000000,"value":{"type":"f64","value":78.5}},{"source_id":6,"sequence_no":1,"monotonic_ns":10000000,"value":{"type":"f64","value":10012.0}}]}
+
+<span style="color:#8faeb5">Recorded from the checked-in Wattch Core deterministic test daemon on 2026-07-14.
+This output verifies frame/sample generation only. It is not a hardware-energy measurement.</span></div>
+  </foreignObject>
+</svg>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://chakib-belgaid.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.com/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.com/fr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.com/" />
+  </url>
+  <url>
+    <loc>https://chakib-belgaid.com/fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.com/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.com/fr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.com/" />
+  </url>
+  <url>
+    <loc>https://chakib-belgaid.com/work/agentdiet</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.com/work/agentdiet" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.com/fr/work/agentdiet" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.com/work/agentdiet" />
+  </url>
+  <url>
+    <loc>https://chakib-belgaid.com/fr/work/agentdiet</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.com/work/agentdiet" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.com/fr/work/agentdiet" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.com/work/agentdiet" />
+  </url>
+  <url>
+    <loc>https://chakib-belgaid.com/work/whispbook</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.com/work/whispbook" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.com/fr/work/whispbook" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.com/work/whispbook" />
+  </url>
+  <url>
+    <loc>https://chakib-belgaid.com/fr/work/whispbook</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.com/work/whispbook" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.com/fr/work/whispbook" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.com/work/whispbook" />
+  </url>
+  <url>
+    <loc>https://chakib-belgaid.com/work/wattch</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.com/work/wattch" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.com/fr/work/wattch" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.com/work/wattch" />
+  </url>
+  <url>
+    <loc>https://chakib-belgaid.com/fr/work/wattch</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.com/work/wattch" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.com/fr/work/wattch" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.com/work/wattch" />
+  </url>
+  <url>
+    <loc>https://chakib-belgaid.com/garden</loc>
+  </url>
+</urlset>

@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "scripts/prerender.ts",
+    "scripts/verify-recruiter-bundle.ts",
+    "src/server/routes.ts"
+  ]
+}

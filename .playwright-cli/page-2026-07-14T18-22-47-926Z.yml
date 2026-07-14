@@ -1,0 +1,23 @@
+- generic [active] [ref=e1]:
+  - link "Skip to game interface" [ref=e2] [cursor=pointer]:
+    - /url: "#game-ui"
+  - main [ref=e4]:
+    - heading "Systems Garden — playable voxel portfolio" [level=1] [ref=e5]
+    - region "Playable voxel systems garden" [ref=e6]
+    - generic:
+      - status: Garden exploration view active.
+      - region "Current objective" [ref=e53]:
+        - generic [ref=e59]:
+          - generic [ref=e60]: CURRENT OBJECTIVE
+          - strong [ref=e61]: Restore WATTCH
+        - progressbar "0 of 4 systems restored" [ref=e62]
+        - generic [ref=e63]: 0/4
+        - generic [ref=e64]: 66M
+      - generic [ref=e68]:
+        - button "Open bird's-eye website view" [ref=e69] [cursor=pointer]
+        - button "Open garden menu" [ref=e72] [cursor=pointer]
+        - button "Projects" [ref=e74] [cursor=pointer]
+        - button "Field log" [ref=e77] [cursor=pointer]
+        - button "Pause game" [ref=e80] [cursor=pointer]
+      - status [ref=e84]:
+        - generic [ref=e89]: FOLLOW THE COMPASS · SPACE TO JUMP · SHIFT TO SPRINT

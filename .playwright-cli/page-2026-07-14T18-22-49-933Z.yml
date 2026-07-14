@@ -1,0 +1,40 @@
+- generic [ref=f1e1]:
+  - link "Skip to game interface" [ref=f1e2] [cursor=pointer]:
+    - /url: "#game-ui"
+  - main [ref=f1e4]:
+    - heading "Systems Garden — playable voxel portfolio" [level=1] [ref=f1e5]
+    - region "Playable voxel systems garden" [ref=f1e6]
+    - main [ref=f1e10]:
+      - region [ref=f1e13]:
+        - generic [ref=f1e14]: A CHAKIB BELGAID GARDEN
+        - heading "SYSTEMS GARDEN" [level=1] [ref=f1e19]:
+          - text: SYSTEMS
+          - generic [ref=f1e20]: GARDEN
+        - paragraph [ref=f1e21]: Explore a living terminal island, discover four technology districts and bring the garden back online.
+        - generic [ref=f1e22]:
+          - button "New game" [ref=f1e23] [cursor=pointer]: NEW GAME
+          - button "Continue" [active] [ref=f1e26] [cursor=pointer]: CONTINUE
+          - button "Settings" [ref=f1e32] [cursor=pointer]: SETTINGS
+        - generic "Game controls" [ref=f1e36]:
+          - generic [ref=f1e37]:
+            - generic [ref=f1e38]: WASD
+            - text: MOVE
+          - generic [ref=f1e39]:
+            - generic [ref=f1e40]: SHIFT
+            - text: SPRINT
+          - generic [ref=f1e41]:
+            - generic [ref=f1e42]: SPACE
+            - text: JUMP
+          - generic [ref=f1e43]:
+            - generic [ref=f1e44]: DRAG
+            - text: LOOK
+          - generic [ref=f1e45]:
+            - generic [ref=f1e46]: E
+            - text: INTERACT
+          - generic [ref=f1e47]:
+            - generic [ref=f1e48]: B
+            - text: OVERVIEW
+          - generic [ref=f1e49]:
+            - generic [ref=f1e50]: TAB
+            - text: FIELD LOG
+      - generic [ref=f1e51]: LOCAL SAVE · OFFLINE READY

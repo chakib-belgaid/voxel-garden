@@ -1,0 +1,8 @@
+- generic [active] [ref=e1]:
+  - link "Skip to game interface" [ref=e2] [cursor=pointer]:
+    - /url: "#game-ui"
+  - main [ref=e4]:
+    - heading "Systems Garden — playable voxel portfolio" [level=1] [ref=e5]
+    - region "Playable voxel systems garden" [ref=e6]
+    - generic:
+      - status: Garden exploration view active.

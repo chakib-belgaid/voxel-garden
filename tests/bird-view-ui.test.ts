@@ -122,6 +122,26 @@ describe("bird-view store contract", () => {
 });
 
 describe("bird-view accessible UI", () => {
+  it("replaces the saved-game title menu with the new-game confirmation", () => {
+    act(() => useGameStore.setState({ hasSave: true }));
+    render(createElement(GameUI));
+
+    expect(screen.getByTestId("title-screen")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "New game" }));
+
+    expect(screen.queryByTestId("title-screen")).toBeNull();
+    expect(screen.getByRole("dialog", { name: "RESET PROGRESS?" })).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("button", { name: "KEEP GARDEN" }));
+    expect(screen.getByTestId("title-screen")).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("button", { name: "New game" }));
+    fireEvent.click(screen.getByRole("button", { name: "RESET PROGRESS" }));
+    expect(screen.queryByTestId("title-screen")).toBeNull();
+    expect(screen.queryByRole("dialog", { name: "RESET PROGRESS?" })).toBeNull();
+    expect(useGameStore.getState().phase).toBe("playing");
+  });
+
   it("supports the overview button and B shortcut while hiding exploration controls", () => {
     act(() => useGameStore.getState().startNewGame());
     render(createElement(GameUI));
