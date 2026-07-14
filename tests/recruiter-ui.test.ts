@@ -20,10 +20,9 @@ describe("recruiter portfolio UI", () => {
     expect(screen.getByText("100+ nodes")).toBeTruthy();
     expect(screen.getByText("98k")).toBeTruthy();
 
-    expect(screen.getAllByRole("link", { name: "Read case study" })).toHaveLength(3);
+    expect(screen.getAllByRole("link", { name: "Read case study" })).toHaveLength(2);
     const caseLinks = document.querySelectorAll<HTMLAnchorElement>('a[href^="/work/"]');
     expect([...caseLinks].map((link) => link.getAttribute("href"))).toEqual([
-      "/work/agentdiet",
       "/work/whispbook",
       "/work/wattch"
     ]);
@@ -44,7 +43,7 @@ describe("recruiter portfolio UI", () => {
   });
 
   it("renders every case-study section in the shared typed order", () => {
-    render(createElement(RecruiterRouter, { route: "/work/agentdiet" }));
+    render(createElement(RecruiterRouter, { route: "/work/wattch" }));
 
     expect([...document.querySelectorAll(".portfolio-case-section")].map((section) => section.id)).toEqual([
       "context",
@@ -55,7 +54,7 @@ describe("recruiter portfolio UI", () => {
       "outcome",
       "proof"
     ]);
-    expect(screen.getByText("Allowed result or explicit denial")).toBeTruthy();
+    expect(screen.getByText("Linux RAPL powercap or deterministic source")).toBeTruthy();
     expect(document.querySelector('a[href="#work"]')).toBeNull();
     expect(document.querySelector('a[href="/#work"]')).toBeTruthy();
   });

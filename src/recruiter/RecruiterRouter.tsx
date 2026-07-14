@@ -116,7 +116,7 @@ function parseRoute(route: string):
 
   if (path === "/" || path === "/fr") return { kind: "home", locale };
 
-  const match = path.match(/^\/(?:fr\/)?work\/(agentdiet|whispbook|wattch)$/);
+  const match = path.match(/^\/(?:fr\/)?work\/(whispbook|wattch)$/);
   if (match) return { kind: "project", locale, slug: match[1] as ProjectSlug };
 
   return { kind: "not-found", locale };

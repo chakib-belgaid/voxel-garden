@@ -1,7 +1,7 @@
 export const locales = ["en", "fr"] as const;
 export type Locale = (typeof locales)[number];
 
-export const projectSlugs = ["agentdiet", "whispbook", "wattch"] as const;
+export const projectSlugs = ["whispbook", "wattch"] as const;
 export type ProjectSlug = (typeof projectSlugs)[number];
 
 export const projectSectionOrder = [
@@ -72,11 +72,6 @@ export const evidenceReferences = {
     source: "CVDB / wattch-rust-energy-profiler",
     sourceUrl: "https://github.com/chakib-belgaid/Wattch",
     note: "Evidence for the Rust daemon/CLI, RAPL, protobuf and Unix-socket architecture.",
-  },
-  "repo:agentdiet": {
-    label: "AgentDiet local source repository",
-    source: "agentDiet / README.md and src/agentdiet",
-    note: "Verified locally; no public repository destination was available during the evidence audit.",
   },
   "repo:whispbook": {
     label: "Whispbook public source repository",
@@ -214,35 +209,6 @@ export interface PortfolioSiteContent {
 }
 
 const enProjects: Record<ProjectSlug, ProjectCaseStudy> = {
-  agentdiet: {
-    slug: "agentdiet",
-    locale: "en",
-    sectionOrder: projectSectionOrder,
-    name: "AgentDiet",
-    eyebrow: "Capability security for AI agents",
-    summary: "A runnable Python SDK, CLI and FastAPI demo that carries signed, attenuating Biscuit capabilities across local, MCP and A2A-style tool calls.",
-    problem: "Agent workflows often inherit backend credentials that are broader than the task. AgentDiet explores a narrower contract: every tool call must prove the exact right, budget and expiry delegated to that agent.",
-    role: "Chakib designed and implemented the authorization model, SDK and CLI surface, multi-agent examples, registry workflow and the FastAPI product demo.",
-    architecture: {
-      overview: "A user mints a signed root mandate. Gateways attenuate it by appending checks for each sub-agent. The receiving tool verifies the token and request facts before its body can run.",
-      flow: ["User mandate + Ed25519 keypair", "Root Biscuit token", "Gateway / agent attenuation", "Local, MCP or A2A-style call", "Tool-side verification", "Allowed result or explicit denial"],
-    },
-    responsibilities: ["Defined the permission and token contracts.", "Built mint, attenuate, inspect and verify CLI flows.", "Implemented local and remote MCP enforcement plus A2A-style delegation examples.", "Connected real backend verification to the FastAPI demo's allowed-versus-denied stories."],
-    decisions: [
-      { decision: "Use append-only Biscuit attenuation.", rationale: "A child can add restrictions without gaining the ability to remove an ancestor's checks.", rejectedAlternative: "Passing a shared bearer token to every agent, which leaves tool scope and budgets unenforced." },
-      { decision: "Verify at the tool boundary.", rationale: "Authorization remains effective even when planner or agent logic is confused or compromised.", rejectedAlternative: "Relying only on prompt instructions or an orchestrator-side allowlist." },
-    ],
-    reliability: ["Signed token blocks make mutation detectable.", "Offline verification needs the token, request facts and root public key rather than a central service at call time.", "The demo persists root key material unencrypted for local interoperability; production key isolation remains explicitly out of scope."],
-    outcomes: [],
-    currentStatus: "Runnable local product demo and SDK. The source repository was local-only during this audit, so no dead GitHub link is published.",
-    technologyGroups: [{ label: "Core", items: ["Python", "Biscuit tokens", "Ed25519", "Pydantic"] }, { label: "Interfaces", items: ["FastAPI", "CLI", "Python SDK"] }, { label: "Agent protocols", items: ["MCP", "A2A-style delegation"] }],
-    media: [
-      { id: "agentdiet-allowed-denied", kind: "image", src: "/assets/projects/agentdiet/allowed-denied-flow.png", alt: "AgentDiet multi-agent travel booking showing allowed actions and denied over-budget and expired-token attempts", caption: "The real backend-backed travel example narrows hotel, email and payment rights, then exposes both allowed and denied outcomes.", evidenceIds: ["repo:agentdiet"] },
-      { id: "agentdiet-mint", kind: "image", src: "/assets/projects/agentdiet/mint-token.png", alt: "AgentDiet mint panel with selected rights and readable Biscuit Datalog", caption: "The demo makes the signed mandate inspectable as readable Datalog.", evidenceIds: ["repo:agentdiet"] },
-    ],
-    proofLinks: [],
-    metadata: { title: "AgentDiet case study | Chakib Belgaid", description: "How AgentDiet narrows AI-agent tool access with signed Biscuit capability tokens, attenuation and tool-side enforcement." },
-  },
   whispbook: {
     slug: "whispbook",
     locale: "en",
@@ -303,21 +269,6 @@ const enProjects: Record<ProjectSlug, ProjectCaseStudy> = {
 };
 
 const frenchProjectCopy: Record<ProjectSlug, Omit<ProjectCaseStudy, "slug" | "locale" | "sectionOrder" | "technologyGroups" | "media" | "proofLinks"> & { technologyGroups: TechnologyGroup[] }> = {
-  agentdiet: {
-    name: "AgentDiet",
-    eyebrow: "Sécurité par capacités pour agents IA",
-    summary: "Un SDK Python, une CLI et une démo FastAPI qui transportent des capacités Biscuit signées et atténuables entre appels d'outils locaux, MCP et de type A2A.",
-    problem: "Les workflows d'agents héritent souvent d'identifiants backend plus larges que la tâche. AgentDiet explore un contrat plus étroit : chaque appel doit prouver le droit, le budget et l'expiration effectivement délégués.",
-    role: "Chakib a conçu et implémenté le modèle d'autorisation, le SDK et la CLI, les exemples multi-agents, le registre de permissions et la démo produit FastAPI.",
-    architecture: { overview: "L'utilisateur crée un mandat racine signé. Les passerelles l'atténuent en ajoutant des vérifications pour chaque sous-agent. L'outil destinataire vérifie le jeton et les faits de la requête avant d'exécuter son code.", flow: ["Mandat utilisateur + paire de clés Ed25519", "Jeton Biscuit racine", "Atténuation par passerelle / agent", "Appel local, MCP ou de type A2A", "Vérification côté outil", "Résultat autorisé ou refus explicite"] },
-    responsibilities: ["Définition des contrats de permissions et de jetons.", "Création des flux CLI de génération, atténuation, inspection et vérification.", "Implémentation de l'application locale, de l'application MCP distante et des exemples de délégation A2A.", "Connexion de vraies vérifications backend aux scénarios autorisés/refusés de la démo FastAPI."],
-    decisions: [{ decision: "Utiliser l'atténuation append-only de Biscuit.", rationale: "Un enfant peut ajouter des restrictions sans pouvoir supprimer celles de ses ancêtres.", rejectedAlternative: "Partager un bearer token avec chaque agent, sans contrôle de portée ni de budget." }, { decision: "Vérifier à la frontière de l'outil.", rationale: "L'autorisation reste effective même si le planificateur ou l'agent est compromis.", rejectedAlternative: "S'appuyer uniquement sur les instructions du prompt ou une allowlist de l'orchestrateur." }],
-    reliability: ["Les blocs signés rendent les modifications détectables.", "La vérification hors ligne utilise le jeton, les faits de requête et la clé publique racine, sans service central à l'exécution.", "La démo conserve la clé racine localement sans chiffrement ; l'isolation de clés de production reste explicitement hors périmètre."],
-    outcomes: [],
-    currentStatus: "Démo produit locale et SDK exécutables. Le dépôt était uniquement local lors de l'audit ; aucun lien GitHub mort n'est publié.",
-    technologyGroups: [{ label: "Cœur", items: ["Python", "Jetons Biscuit", "Ed25519", "Pydantic"] }, { label: "Interfaces", items: ["FastAPI", "CLI", "SDK Python"] }, { label: "Protocoles agents", items: ["MCP", "Délégation de type A2A"] }],
-    metadata: { title: "Étude de cas AgentDiet | Chakib Belgaid", description: "AgentDiet réduit l'accès des agents IA avec des capacités Biscuit signées, l'atténuation et une vérification côté outil." },
-  },
   whispbook: {
     name: "Whispbook",
     eyebrow: "Workflows IA d'audiobook local-first",
@@ -352,11 +303,10 @@ const frenchProjectCopy: Record<ProjectSlug, Omit<ProjectCaseStudy, "slug" | "lo
 
 function buildFrenchProject(slug: ProjectSlug): ProjectCaseStudy {
   const english = enProjects[slug];
-  return { ...english, ...frenchProjectCopy[slug], locale: "fr", architecture: frenchProjectCopy[slug].architecture, sectionOrder: projectSectionOrder, media: english.media.map((item) => ({ ...item, alt: item.id === "wattch-deterministic-trace" ? "Transcription du daemon de test déterministe Wattch" : item.alt, caption: item.id === "wattch-deterministic-trace" ? "Sortie réelle du scénario déterministe versionné ; preuve de protocole, pas mesure énergétique matérielle." : item.id === "agentdiet-mint" ? "La démo rend le mandat signé inspectable sous forme de Datalog lisible." : "L'exemple de voyage soutenu par le backend réduit les droits et montre les résultats autorisés comme refusés." })) };
+  return { ...english, ...frenchProjectCopy[slug], locale: "fr", architecture: frenchProjectCopy[slug].architecture, sectionOrder: projectSectionOrder, media: english.media.map((item) => ({ ...item, alt: item.id === "wattch-deterministic-trace" ? "Transcription du daemon de test déterministe Wattch" : item.alt, caption: item.id === "wattch-deterministic-trace" ? "Sortie réelle du scénario déterministe versionné ; preuve de protocole, pas mesure énergétique matérielle." : item.caption })) };
 }
 
 const frProjects: Record<ProjectSlug, ProjectCaseStudy> = {
-  agentdiet: buildFrenchProject("agentdiet"),
   whispbook: buildFrenchProject("whispbook"),
   wattch: buildFrenchProject("wattch"),
 };
@@ -376,7 +326,7 @@ export const siteContent = {
     hero: { eyebrow: "Mohammed Chakib Belgaid, Ph.D.", title: "Full-stack Product Engineer for AI systems and developer tools.", summary: "Ph.D. in software engineering with 10+ years across product delivery, backend and applied AI, from founder-led mobile products to research-grade measurement infrastructure and production agent workflows.", primaryCta: "View selected work", secondaryCta: "Download CV", tertiaryCta: "Enter Systems Garden", evidenceIds: ["cvdb:career-timeline", "cvdb:mcq-agentic-ai-platform", "cvdb:phd-green-coding"] },
     impact: impactEn,
     featuredHeading: "Selected work",
-    featuredIntro: "Three systems, each documented with architecture, trade-offs, current status and verifiable proof.",
+    featuredIntro: "Two systems, each documented with architecture, trade-offs, current status and verifiable proof.",
     capabilities: [
       { id: "product-interfaces", title: "Product interfaces", items: ["React and TypeScript", "Workflow design", "Accessible, responsive UI"] },
       { id: "apis-backend", title: "APIs and backend", items: ["Python and FastAPI", "Storage and job orchestration", "Cloud deployment and CI/CD"] },
@@ -391,7 +341,7 @@ export const siteContent = {
     ],
     garden: { eyebrow: "Interactive lab", title: "Systems Garden", summary: "A separate creative-engineering experiment that turns systems concepts into a playable voxel world. It loads only when you choose to enter.", cta: "Enter the garden", languageNote: "The interactive experience is in English." },
     contact: { heading: "Build something useful", summary: "For product engineering, applied AI or developer-tooling work, reach out directly.", emailLabel: "Email", githubLabel: "GitHub", linkedinLabel: "LinkedIn" },
-    metadata: { title: "Chakib Belgaid | Full-stack Product Engineer", description: "Full-stack product engineer building AI systems and developer tools. Selected work: AgentDiet, Whispbook and Wattch." },
+    metadata: { title: "Chakib Belgaid | Full-stack Product Engineer", description: "Full-stack product engineer building AI systems and developer tools. Selected work: Whispbook and Wattch." },
   },
   fr: {
     locale: "fr",
@@ -399,7 +349,7 @@ export const siteContent = {
     hero: { eyebrow: "Mohammed Chakib Belgaid, Ph.D.", title: "Ingénieur produit full-stack pour les systèmes IA et les outils développeurs.", summary: "Docteur en génie logiciel avec plus de 10 ans entre produit, backend et IA appliquée, des applications mobiles portées comme fondateur aux infrastructures de mesure de niveau recherche et aux workflows d'agents en production.", primaryCta: "Voir les projets", secondaryCta: "Télécharger le CV", tertiaryCta: "Entrer dans Systems Garden", evidenceIds: ["cvdb:career-timeline", "cvdb:mcq-agentic-ai-platform", "cvdb:phd-green-coding"] },
     impact: impactEn.map((metric) => ({ ...metric, label: metric.id === "latency" ? "Réduction de latence d'inférence" : metric.id === "nodes" ? "Déploiement PowerAPI" : "Téléchargements PyPI totaux de pyJoules", value: metric.id === "nodes" ? "100+ nœuds" : metric.value })),
     featuredHeading: "Projets sélectionnés",
-    featuredIntro: "Trois systèmes documentés par leur architecture, leurs compromis, leur état actuel et des preuves vérifiables.",
+    featuredIntro: "Deux systèmes documentés par leur architecture, leurs compromis, leur état actuel et des preuves vérifiables.",
     capabilities: [
       { id: "product-interfaces", title: "Interfaces produit", items: ["React et TypeScript", "Conception de workflows", "UI accessible et responsive"] },
       { id: "apis-backend", title: "API et backend", items: ["Python et FastAPI", "Stockage et orchestration de jobs", "Déploiement cloud et CI/CD"] },
@@ -414,7 +364,7 @@ export const siteContent = {
     ],
     garden: { eyebrow: "Laboratoire interactif", title: "Systems Garden", summary: "Une expérience séparée de creative engineering qui transforme des concepts systèmes en monde voxel jouable. Elle ne se charge que si vous choisissez d'entrer.", cta: "Entrer dans le jardin", languageNote: "L'expérience interactive est en anglais." },
     contact: { heading: "Construisons quelque chose d'utile", summary: "Pour des missions en ingénierie produit, IA appliquée ou outils développeurs, contactez-moi directement.", emailLabel: "E-mail", githubLabel: "GitHub", linkedinLabel: "LinkedIn" },
-    metadata: { title: "Chakib Belgaid | Ingénieur produit full-stack", description: "Ingénieur produit full-stack spécialisé en systèmes IA et outils développeurs. Projets : AgentDiet, Whispbook et Wattch." },
+    metadata: { title: "Chakib Belgaid | Ingénieur produit full-stack", description: "Ingénieur produit full-stack spécialisé en systèmes IA et outils développeurs. Projets : Whispbook et Wattch." },
   },
 } as const satisfies Record<Locale, PortfolioSiteContent>;
 

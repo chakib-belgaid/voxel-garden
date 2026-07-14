@@ -17,10 +17,6 @@ export interface RecruiterRouteRecord {
 }
 
 const HOME_ALTERNATES = { en: "/", fr: "/fr" } as const;
-const AGENTDIET_ALTERNATES = {
-  en: "/work/agentdiet",
-  fr: "/fr/work/agentdiet"
-} as const;
 const WHISPBOOK_ALTERNATES = {
   en: "/work/whispbook",
   fr: "/fr/work/whispbook"
@@ -51,26 +47,6 @@ export const RECRUITER_ROUTES = [
     description: siteContent.fr.metadata.description,
     alternate: HOME_ALTERNATES,
     socialImage: "/social/home-fr.svg"
-  },
-  {
-    path: "/work/agentdiet",
-    output: "work/agentdiet/index.html",
-    locale: "en",
-    kind: "case-study",
-    title: projects.en.agentdiet.metadata.title,
-    description: projects.en.agentdiet.metadata.description,
-    alternate: AGENTDIET_ALTERNATES,
-    socialImage: "/social/agentdiet-en.svg"
-  },
-  {
-    path: "/fr/work/agentdiet",
-    output: "fr/work/agentdiet/index.html",
-    locale: "fr",
-    kind: "case-study",
-    title: projects.fr.agentdiet.metadata.title,
-    description: projects.fr.agentdiet.metadata.description,
-    alternate: AGENTDIET_ALTERNATES,
-    socialImage: "/social/agentdiet-fr.svg"
   },
   {
     path: "/work/whispbook",
@@ -137,8 +113,6 @@ export type RecruiterRoutePath = (typeof RECRUITER_ROUTES)[number]["path"];
 export const PUBLIC_SITEMAP_PATHS = [
   "/",
   "/fr",
-  "/work/agentdiet",
-  "/fr/work/agentdiet",
   "/work/whispbook",
   "/fr/work/whispbook",
   "/work/wattch",
@@ -150,7 +124,12 @@ export function getRecruiterRoute(path: string): RecruiterRouteRecord {
   const normalized = path.length > 1 ? path.replace(/\/+$/, "") : path;
   const exact = RECRUITER_ROUTES.find((route) => route.path === normalized);
   if (exact) return exact;
-  return normalized.startsWith("/fr") ? RECRUITER_ROUTES[9] : RECRUITER_ROUTES[8];
+  const locale = normalized.startsWith("/fr") ? "fr" : "en";
+  const fallback = RECRUITER_ROUTES.find(
+    (route) => route.kind === "not-found" && route.locale === locale
+  );
+  if (!fallback) throw new Error(`Missing ${locale} not-found route.`);
+  return fallback;
 }
 
 export function absoluteUrl(path: string, origin = CANONICAL_ORIGIN): string {

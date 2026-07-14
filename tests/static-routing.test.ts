@@ -17,8 +17,6 @@ describe("static recruiter route contract", () => {
     expect(RECRUITER_ROUTES.map((route) => route.path)).toEqual([
       "/",
       "/fr",
-      "/work/agentdiet",
-      "/fr/work/agentdiet",
       "/work/whispbook",
       "/fr/work/whispbook",
       "/work/wattch",
@@ -35,8 +33,6 @@ describe("static recruiter route contract", () => {
     expect(PUBLIC_SITEMAP_PATHS).toEqual([
       "/",
       "/fr",
-      "/work/agentdiet",
-      "/fr/work/agentdiet",
       "/work/whispbook",
       "/fr/work/whispbook",
       "/work/wattch",
@@ -85,11 +81,11 @@ describe("React server renderer", () => {
 
   it("uses the canonical base passed by preview and test environments", () => {
     const rendered = renderRoute({
-      route: "/fr/work/agentdiet",
+      route: "/fr/work/whispbook",
       canonicalBaseUrl: "https://preview.example/"
     });
     expect(rendered.head).toContain(
-      'rel="canonical" href="https://preview.example/fr/work/agentdiet"'
+      'rel="canonical" href="https://preview.example/fr/work/whispbook"'
     );
     expect(rendered.head).not.toContain(CANONICAL_ORIGIN);
   });
