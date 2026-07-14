@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from "react";
+import { CarbonFootprint } from "../sustainability/CarbonFootprint";
 import {
   evidenceReferences,
   getAlternateLocale,
@@ -560,6 +561,7 @@ export function RecruiterRouter({ route }: RecruiterRouterProps) {
       {parsed.kind === "home" ? <HomePage locale={parsed.locale} /> : null}
       {parsed.kind === "project" ? <ProjectPage locale={parsed.locale} slug={parsed.slug} /> : null}
       {parsed.kind === "not-found" ? <NotFoundPage locale={parsed.locale} /> : null}
+      <CarbonFootprint locale={parsed.locale} />
     </div>
   );
 }

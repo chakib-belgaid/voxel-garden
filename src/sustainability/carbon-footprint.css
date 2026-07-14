@@ -1,0 +1,192 @@
+.carbon-footprint-meter {
+  position: fixed;
+  z-index: 80;
+  right: max(18px, calc(12px + env(safe-area-inset-right, 0px)));
+  bottom: max(18px, calc(12px + env(safe-area-inset-bottom, 0px)));
+  width: min(342px, calc(100vw - 36px));
+  color: var(--portfolio-text, var(--cream-100));
+  font-family: var(--font-mono);
+  pointer-events: none;
+}
+
+.carbon-footprint-meter :is(button, a) {
+  pointer-events: auto;
+}
+
+.carbon-footprint-toggle {
+  width: max-content;
+  min-width: 196px;
+  min-height: 52px;
+  display: grid;
+  grid-template-columns: 8px minmax(0, 1fr) 18px;
+  gap: 10px;
+  align-items: center;
+  margin-left: auto;
+  padding: 8px 12px;
+  border: 1px solid var(--portfolio-rule-strong, var(--brass-400));
+  border-radius: 0;
+  background: rgba(4, 18, 22, 0.96);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.62);
+  color: var(--portfolio-text, var(--cream-100));
+  font-family: var(--font-mono);
+  text-align: left;
+  cursor: pointer;
+}
+
+.carbon-footprint-toggle__signal {
+  width: 7px;
+  height: 7px;
+  background: var(--portfolio-lime, var(--lime-400));
+  box-shadow: 0 0 9px color-mix(in srgb, var(--portfolio-lime, var(--lime-400)) 72%, transparent);
+}
+
+.carbon-footprint-toggle > span:nth-child(2) {
+  display: grid;
+  gap: 3px;
+}
+
+.carbon-footprint-toggle small {
+  color: var(--portfolio-muted, var(--cream-400));
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.carbon-footprint-toggle strong {
+  color: var(--portfolio-lime, var(--lime-300));
+  font: 400 20px/1 var(--font-display);
+  letter-spacing: 0.035em;
+}
+
+.carbon-footprint-toggle > svg {
+  width: 17px;
+  height: 17px;
+  color: var(--portfolio-cyan, var(--cyan-400));
+  transition: transform 160ms ease;
+}
+
+.carbon-footprint-meter[data-expanded="true"] .carbon-footprint-toggle > svg {
+  transform: rotate(180deg);
+}
+
+.carbon-footprint-panel {
+  width: 100%;
+  margin-bottom: 9px;
+  padding: 18px;
+  border: 1px solid var(--portfolio-rule-strong, var(--brass-400));
+  background: rgba(2, 11, 14, 0.98);
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.68);
+  pointer-events: auto;
+}
+
+.carbon-footprint-panel__heading {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--portfolio-rule, var(--brass-700));
+}
+
+.carbon-footprint-panel__heading > svg {
+  width: 23px;
+  height: 23px;
+  color: var(--portfolio-lime, var(--lime-400));
+}
+
+.carbon-footprint-panel__heading span {
+  color: var(--portfolio-cyan, var(--cyan-400));
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.carbon-footprint-panel h2 {
+  margin: 3px 0 0;
+  color: var(--portfolio-text, var(--cream-100));
+  font: 400 25px/1 var(--font-display);
+  letter-spacing: 0.025em;
+}
+
+.carbon-footprint-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 14px 0;
+}
+
+.carbon-footprint-stats > div {
+  min-width: 0;
+  padding-right: 9px;
+}
+
+.carbon-footprint-stats > div + div {
+  padding-left: 9px;
+  border-left: 1px solid var(--portfolio-rule, var(--brass-700));
+}
+
+.carbon-footprint-stats dt {
+  min-height: 23px;
+  color: var(--portfolio-muted, var(--cream-400));
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: 0.065em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.carbon-footprint-stats dd {
+  overflow: hidden;
+  margin: 5px 0 0;
+  color: var(--portfolio-lime, var(--lime-300));
+  font: 400 17px/1 var(--font-display);
+  letter-spacing: 0.025em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.carbon-footprint-panel p {
+  margin: 0;
+  color: var(--portfolio-muted, var(--cream-400));
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+.carbon-footprint-panel a {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--portfolio-cyan, var(--cyan-400));
+  font-size: 9px;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 420px) {
+  .carbon-footprint-meter {
+    top: calc(88px + env(safe-area-inset-top, 0px));
+    right: max(10px, env(safe-area-inset-right, 0px));
+    bottom: auto;
+    width: calc(100vw - 20px);
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+  }
+
+  .carbon-footprint-panel {
+    margin-top: 9px;
+    margin-bottom: 0;
+    padding: 15px;
+  }
+
+  .carbon-footprint-toggle {
+    min-width: 184px;
+    min-height: 48px;
+  }
+}
+
+@media print {
+  .carbon-footprint-meter {
+    display: none;
+  }
+}
