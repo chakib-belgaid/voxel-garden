@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 
 import { createElement } from "react";
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { RecruiterRouter } from "../src/recruiter/RecruiterRouter";
 
@@ -31,6 +31,12 @@ describe("recruiter portfolio UI", () => {
     expect(document.querySelector('a[href="mailto:chakib.belgaid@gmail.com"]')).toBeTruthy();
     expect(document.querySelector('a[href="https://github.com/chakib-belgaid"][rel="noopener noreferrer"]')).toBeTruthy();
     expect(document.querySelector('a[href="https://www.linkedin.com/in/chakib-belgaid"][rel="noopener noreferrer"]')).toBeTruthy();
+    expect(document.querySelector('.carbon-footprint-meter[data-mode="live"]')).toBeTruthy();
+
+    const modes = screen.getByRole("navigation", { name: "Experience mode" });
+    expect(within(modes).getByRole("link", { name: "ASCII" }).getAttribute("href")).toBe("/ascii");
+    expect(within(modes).getByRole("link", { name: "LIVE" }).getAttribute("aria-current")).toBe("page");
+    expect(within(modes).getByRole("link", { name: "LIVE 3D" }).getAttribute("href")).toBe("/garden");
   });
 
   it("keeps the language switch on the matching French case study", () => {
@@ -40,6 +46,7 @@ describe("recruiter portfolio UI", () => {
     expect(screen.getByRole("link", { name: "English" }).getAttribute("href")).toBe("/work/whispbook");
     expect(screen.getByRole("link", { name: "Projets" }).getAttribute("href")).toBe("/fr#work");
     expect(document.querySelector<HTMLAnchorElement>('a[download][href$="-fr.pdf"]')).toBeTruthy();
+    expect(screen.getByRole("link", { name: "LIVE" }).getAttribute("href")).toBe("/fr");
   });
 
   it("renders every case-study section in the shared typed order", () => {

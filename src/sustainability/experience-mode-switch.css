@@ -1,0 +1,58 @@
+.experience-mode-switch {
+  --mode-switch-bg: var(--portfolio-bg, var(--void-950, #020b0e));
+  --mode-switch-surface: var(--portfolio-surface, var(--panel-900, #041317));
+  --mode-switch-border: var(--portfolio-rule-strong, var(--brass-400, #756238));
+  --mode-switch-text: var(--portfolio-muted, var(--cream-400, #aaa093));
+  --mode-switch-active: var(--portfolio-lime, var(--lime-400, #9bd42b));
+  display: inline-grid;
+  min-width: 196px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--mode-switch-border);
+  background: var(--mode-switch-bg);
+  color: var(--mode-switch-text);
+  font-family: inherit;
+  pointer-events: auto;
+}
+
+.experience-mode-switch a {
+  display: flex;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 8px;
+  color: inherit;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.experience-mode-switch a + a {
+  border-left: 1px solid var(--mode-switch-border);
+}
+
+.experience-mode-switch a:hover,
+.experience-mode-switch a:focus-visible {
+  background: var(--mode-switch-surface);
+  color: var(--mode-switch-active);
+}
+
+.experience-mode-switch a[aria-current="page"] {
+  background: var(--mode-switch-active);
+  color: var(--mode-switch-bg);
+}
+
+.experience-mode-switch--ascii {
+  --mode-switch-bg: var(--ascii-bg, #020703);
+  --mode-switch-surface: var(--ascii-surface-strong, #09170c);
+  --mode-switch-border: var(--ascii-line-bright, #397a43);
+  --mode-switch-text: var(--ascii-muted, #6f8972);
+  --mode-switch-active: var(--ascii-green, #9cff57);
+  min-width: 224px;
+}
+
+.experience-mode-switch--ascii a {
+  min-height: 26px;
+  font-size: 7px;
+}

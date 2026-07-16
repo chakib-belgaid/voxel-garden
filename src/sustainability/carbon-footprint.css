@@ -9,8 +9,25 @@
   pointer-events: none;
 }
 
+.carbon-footprint-meter[data-mode="ascii"] {
+  --portfolio-bg: var(--ascii-bg, #020703);
+  --portfolio-surface: var(--ascii-surface-strong, #09170c);
+  --portfolio-rule: var(--ascii-line, #1d4924);
+  --portfolio-rule-strong: var(--ascii-line-bright, #397a43);
+  --portfolio-text: var(--ascii-text, #b8cdb9);
+  --portfolio-muted: var(--ascii-muted, #6f8972);
+  --portfolio-lime: var(--ascii-green, #9cff57);
+  --portfolio-cyan: var(--ascii-green-soft, #58c868);
+}
+
 .carbon-footprint-meter :is(button, a) {
   pointer-events: auto;
+}
+
+.carbon-footprint-controls {
+  display: grid;
+  gap: 7px;
+  justify-items: end;
 }
 
 .carbon-footprint-toggle {
@@ -58,6 +75,7 @@
   color: var(--portfolio-lime, var(--lime-300));
   font: 400 20px/1 var(--font-display);
   letter-spacing: 0.035em;
+  white-space: nowrap;
 }
 
 .carbon-footprint-toggle > svg {
@@ -67,7 +85,15 @@
   transition: transform 160ms ease;
 }
 
-.carbon-footprint-meter[data-expanded="true"] .carbon-footprint-toggle > svg {
+.carbon-footprint-toggle__ascii-chevron {
+  color: var(--portfolio-cyan, var(--cyan-400));
+  font-size: 17px;
+  line-height: 1;
+  text-align: center;
+  transition: transform 160ms ease;
+}
+
+.carbon-footprint-meter[data-expanded="true"] .carbon-footprint-toggle > :is(svg, .carbon-footprint-toggle__ascii-chevron) {
   transform: rotate(180deg);
 }
 
@@ -94,6 +120,13 @@
   width: 23px;
   height: 23px;
   color: var(--portfolio-lime, var(--lime-400));
+}
+
+.carbon-footprint-panel__ascii-mark {
+  color: var(--portfolio-lime, var(--lime-400));
+  font-size: 25px;
+  line-height: 1;
+  text-align: center;
 }
 
 .carbon-footprint-panel__heading span {
@@ -182,6 +215,40 @@
   .carbon-footprint-toggle {
     min-width: 184px;
     min-height: 48px;
+  }
+
+  .carbon-footprint-meter[data-mode="ascii"] {
+    top: auto;
+    bottom: max(10px, env(safe-area-inset-bottom, 0px));
+    flex-direction: column;
+  }
+
+  .carbon-footprint-meter[data-mode="ascii"] .carbon-footprint-controls {
+    width: 224px;
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .carbon-footprint-meter[data-mode="ascii"] .experience-mode-switch {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .carbon-footprint-meter[data-mode="ascii"] .carbon-footprint-toggle {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding-inline: 9px;
+  }
+
+  .carbon-footprint-meter[data-mode="ascii"] .experience-mode-switch a {
+    min-height: 44px;
+    padding-inline: 4px;
+  }
+
+  .carbon-footprint-meter[data-mode="ascii"] .carbon-footprint-panel {
+    margin-top: 0;
+    margin-bottom: 9px;
   }
 }
 

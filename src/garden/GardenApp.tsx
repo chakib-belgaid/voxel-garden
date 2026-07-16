@@ -9,6 +9,7 @@ import {
   useGameStore
 } from "../game/store";
 import { GameUI } from "../ui";
+import { CarbonFootprint } from "../sustainability/CarbonFootprint";
 import "../styles/app.css";
 
 interface BoundaryProps {
@@ -129,6 +130,7 @@ export function GardenApp() {
         ) : fallback}
       </section>
       <GameUI />
+      <CarbonFootprint locale="en" mode="game" />
     </main>
   );
 }

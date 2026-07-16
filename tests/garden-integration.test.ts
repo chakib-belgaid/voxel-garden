@@ -2,7 +2,7 @@
 
 import { createElement } from "react";
 import { act, cleanup, render, screen } from "@testing-library/react";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import App, { GardenApp } from "../src/App";
 import GardenAppModule from "../src/garden/GardenApp";
 import { getGardenCaseStudyPath } from "../src/garden/caseStudyLinks";
@@ -50,6 +50,7 @@ beforeEach(resetStore);
 
 afterEach(() => {
   cleanup();
+  vi.restoreAllMocks();
   resetStore();
 });
 
@@ -57,6 +58,18 @@ describe("garden portfolio boundary", () => {
   it("keeps the current app entry as a compatibility export of the lazy-loadable garden root", () => {
     expect(App).toBe(GardenApp);
     expect(GardenAppModule).toBe(GardenApp);
+  });
+
+  it("exposes the three presentation modes from the game power widget", () => {
+    vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(null);
+    render(createElement(GardenApp));
+
+    expect(document.querySelector('.carbon-footprint-meter[data-mode="game"]')).toBeTruthy();
+    const modes = screen.getByRole("navigation", { name: "Experience mode" });
+    expect(modes.querySelector('a[href="/ascii"]')).toBeTruthy();
+    expect(modes.querySelector('a[href="/"]')).toBeTruthy();
+    expect(modes.querySelector('a[href="/garden"][aria-current="page"]')).toBeTruthy();
+    expect(screen.getByRole("link", { name: "LIVE 3D" })).toBeTruthy();
   });
 
   it("links the title and live garden HUD back to the recruiter portfolio", () => {
