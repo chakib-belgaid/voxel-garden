@@ -1,6 +1,5 @@
 import React from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
-import "./recruiter/recruiter.css";
 
 const root = document.getElementById("root");
 
@@ -12,6 +11,16 @@ const path = window.location.pathname.length > 1
 
 if (path === "/fr/garden") {
   window.location.replace("/garden");
+} else if (path === "/ascii") {
+  document.documentElement.lang = "en";
+  document.body.classList.add("ascii-route");
+
+  const { AsciiGardenApp } = await import("./ascii/AsciiGardenApp");
+  createRoot(root).render(
+    <React.StrictMode>
+      <AsciiGardenApp />
+    </React.StrictMode>
+  );
 } else if (path === "/garden") {
   document.documentElement.lang = "en";
   document.body.classList.add("garden-route");
@@ -36,6 +45,7 @@ if (path === "/fr/garden") {
   document.documentElement.lang = locale;
   document.body.classList.add("recruiter-route");
 
+  await import("./recruiter/recruiter.css");
   const { RecruiterRouter } = await import("./recruiter/RecruiterRouter");
   const app = (
     <React.StrictMode>

@@ -9,12 +9,13 @@
     {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "www.chakib-belgaid.com" }],
-      "destination": "https://chakib-belgaid.com/$1",
+      "destination": "https://chakib-belgaid.github.io/$1",
       "permanent": true
     },
     { "source": "/fr/garden", "destination": "/garden", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/ascii", "destination": "/ascii/index.html" },
     { "source": "/garden/:path*", "destination": "/garden/index.html" },
     { "source": "/fr/:path*", "destination": "/fr/404.html" }
   ],

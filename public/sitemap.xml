@@ -1,42 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://chakib-belgaid.com/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.com/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.com/fr" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.com/" />
+    <loc>https://chakib-belgaid.github.io/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.github.io/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.github.io/fr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.github.io/" />
   </url>
   <url>
-    <loc>https://chakib-belgaid.com/fr</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.com/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.com/fr" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.com/" />
+    <loc>https://chakib-belgaid.github.io/fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.github.io/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.github.io/fr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.github.io/" />
   </url>
   <url>
-    <loc>https://chakib-belgaid.com/work/whispbook</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.com/work/whispbook" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.com/fr/work/whispbook" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.com/work/whispbook" />
+    <loc>https://chakib-belgaid.github.io/work/whispbook</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.github.io/work/whispbook" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.github.io/fr/work/whispbook" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.github.io/work/whispbook" />
   </url>
   <url>
-    <loc>https://chakib-belgaid.com/fr/work/whispbook</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.com/work/whispbook" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.com/fr/work/whispbook" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.com/work/whispbook" />
+    <loc>https://chakib-belgaid.github.io/fr/work/whispbook</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.github.io/work/whispbook" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.github.io/fr/work/whispbook" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.github.io/work/whispbook" />
   </url>
   <url>
-    <loc>https://chakib-belgaid.com/work/wattch</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.com/work/wattch" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.com/fr/work/wattch" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.com/work/wattch" />
+    <loc>https://chakib-belgaid.github.io/work/wattch</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.github.io/work/wattch" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.github.io/fr/work/wattch" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.github.io/work/wattch" />
   </url>
   <url>
-    <loc>https://chakib-belgaid.com/fr/work/wattch</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.com/work/wattch" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.com/fr/work/wattch" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.com/work/wattch" />
+    <loc>https://chakib-belgaid.github.io/fr/work/wattch</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.github.io/work/wattch" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.github.io/fr/work/wattch" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.github.io/work/wattch" />
   </url>
   <url>
-    <loc>https://chakib-belgaid.com/garden</loc>
+    <loc>https://chakib-belgaid.github.io/garden</loc>
+  </url>
+  <url>
+    <loc>https://chakib-belgaid.github.io/ascii</loc>
   </url>
 </urlset>

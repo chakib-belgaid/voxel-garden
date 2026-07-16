@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://chakib-belgaid.com/sitemap.xml
+Sitemap: https://chakib-belgaid.github.io/sitemap.xml

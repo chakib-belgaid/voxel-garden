@@ -904,7 +904,7 @@ body:has(.portfolio-site) {
 
   .portfolio-hero {
     min-height: auto;
-    padding-block: 82px 68px;
+    padding-block: 110px 68px;
   }
 
   .portfolio-hero__name {

@@ -8,6 +8,11 @@
   status = 301
 
 [[redirects]]
+  from = "/ascii"
+  to = "/ascii/index.html"
+  status = 200
+
+[[redirects]]
   from = "/garden/*"
   to = "/garden/index.html"
   status = 200

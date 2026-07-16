@@ -1,6 +1,6 @@
 import { projects, siteContent } from "../content/portfolio";
 
-export const CANONICAL_ORIGIN = "https://chakib-belgaid.com";
+export const CANONICAL_ORIGIN = "https://chakib-belgaid.github.io";
 
 export type RecruiterLocale = "en" | "fr";
 export type RecruiterRouteKind = "home" | "case-study" | "not-found";
@@ -117,7 +117,8 @@ export const PUBLIC_SITEMAP_PATHS = [
   "/fr/work/whispbook",
   "/work/wattch",
   "/fr/work/wattch",
-  "/garden"
+  "/garden",
+  "/ascii"
 ] as const;
 
 export function getRecruiterRoute(path: string): RecruiterRouteRecord {

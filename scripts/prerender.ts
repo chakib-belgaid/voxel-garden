@@ -88,8 +88,8 @@ function gardenHead(): string {
     `<meta name="description" content="${description}">`,
     '<meta name="robots" content="index, follow">',
     `<link rel="canonical" href="${canonical}">`,
-    '<link rel="alternate" hreflang="en" href="https://chakib-belgaid.com/garden">',
-    '<link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.com/garden">',
+    `<link rel="alternate" hreflang="en" href="${canonical}">`,
+    `<link rel="alternate" hreflang="x-default" href="${canonical}">`,
     '<meta property="og:type" content="website">',
     '<meta property="og:site_name" content="Chakib Belgaid">',
     '<meta property="og:locale" content="en_US">',
@@ -101,6 +101,43 @@ function gardenHead(): string {
     '<meta name="twitter:title" content="Systems Garden · Chakib Belgaid">',
     `<meta name="twitter:description" content="${description}">`,
     `<meta name="twitter:image" content="${socialImage}">`,
+    `<script type="application/ld+json" data-prerender-jsonld>${JSON.stringify(jsonLd)}</script>`
+  ].join("\n    ");
+}
+
+function asciiHead(): string {
+  const canonical = `${CANONICAL_ORIGIN}/ascii`;
+  const description = "An ASCII-only green software portfolio with animated solar, wind and energy-aware systems.";
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: "ASCII Systems Garden",
+    description,
+    url: canonical,
+    creator: {
+      "@type": "Person",
+      name: "Chakib Belgaid",
+      url: `${CANONICAL_ORIGIN}/`
+    }
+  };
+
+  return [
+    "<title>ASCII Systems Garden · Chakib Belgaid</title>",
+    `<meta name="description" content="${description}">`,
+    '<meta name="robots" content="index, follow">',
+    `<link rel="canonical" href="${canonical}">`,
+    '<link rel="icon" href="data:,">',
+    `<link rel="alternate" hreflang="en" href="${canonical}">`,
+    `<link rel="alternate" hreflang="x-default" href="${canonical}">`,
+    '<meta property="og:type" content="website">',
+    '<meta property="og:site_name" content="Chakib Belgaid">',
+    '<meta property="og:locale" content="en_US">',
+    '<meta property="og:title" content="ASCII Systems Garden · Chakib Belgaid">',
+    `<meta property="og:description" content="${description}">`,
+    `<meta property="og:url" content="${canonical}">`,
+    '<meta name="twitter:card" content="summary">',
+    '<meta name="twitter:title" content="ASCII Systems Garden · Chakib Belgaid">',
+    `<meta name="twitter:description" content="${description}">`,
     `<script type="application/ld+json" data-prerender-jsonld>${JSON.stringify(jsonLd)}</script>`
   ].join("\n    ");
 }
@@ -127,6 +164,27 @@ async function writeOutput(relativePath: string, html: string): Promise<void> {
   await writeFile(destination, html, "utf8");
 }
 
+function redirectDocument(destination: string): string {
+  const canonical = `${CANONICAL_ORIGIN}${destination}`;
+  const clientDestination = JSON.stringify(destination);
+
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, follow">
+    <meta http-equiv="refresh" content="0; url=${destination}">
+    <link rel="canonical" href="${canonical}">
+    <title>Redirecting…</title>
+    <script>window.location.replace(${clientDestination} + window.location.search + window.location.hash);</script>
+  </head>
+  <body>
+    <p><a href="${destination}">Continue to Systems Garden</a></p>
+  </body>
+</html>`;
+}
+
 async function verifySitemap(): Promise<void> {
   const sitemap = await readFile(resolve(distDirectory, "sitemap.xml"), "utf8");
   for (const route of PUBLIC_SITEMAP_PATHS) {
@@ -148,6 +206,18 @@ async function prerender(): Promise<void> {
     htmlAttributes: { lang: "en" }
   });
   await writeOutput("garden/index.html", garden);
+  await writeOutput("fr/garden/index.html", redirectDocument("/garden"));
+
+  const asciiTemplate = template.replace(
+    /\s*<link\b[^>]*\brel=["']icon["'][^>]*>/gi,
+    ""
+  );
+  const ascii = renderDocument(asciiTemplate, "/ascii", {
+    appHtml: "",
+    head: asciiHead(),
+    htmlAttributes: { lang: "en" }
+  });
+  await writeOutput("ascii/index.html", ascii);
 
   for (const route of RECRUITER_ROUTES) {
     const rendered = renderer.renderRoute({
@@ -160,7 +230,7 @@ async function prerender(): Promise<void> {
 
   await verifySitemap();
   await rm(serverDirectory, { recursive: true, force: true });
-  console.log(`Prerendered ${RECRUITER_ROUTES.length} recruiter documents and the /garden SPA shell.`);
+  console.log(`Prerendered ${RECRUITER_ROUTES.length} recruiter documents, /garden and /ascii SPA shells, plus the /fr/garden redirect.`);
 }
 
 await prerender();

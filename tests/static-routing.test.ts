@@ -37,7 +37,8 @@ describe("static recruiter route contract", () => {
       "/fr/work/whispbook",
       "/work/wattch",
       "/fr/work/wattch",
-      "/garden"
+      "/garden",
+      "/ascii"
     ]);
     expect(PUBLIC_SITEMAP_PATHS).not.toContain("/fr/garden");
   });
@@ -123,10 +124,11 @@ describe("static discovery and deployment files", () => {
       expect.objectContaining({ source: "/fr/garden", destination: "/garden", permanent: true })
     );
     expect(vercel.redirects).toContainEqual(
-      expect.objectContaining({ destination: "https://chakib-belgaid.com/$1", permanent: true })
+      expect.objectContaining({ destination: "https://chakib-belgaid.github.io/$1", permanent: true })
     );
     expect(vercel.routes).toBeUndefined();
     expect(vercel.rewrites).toEqual([
+      { source: "/ascii", destination: "/ascii/index.html" },
       { source: "/garden/:path*", destination: "/garden/index.html" },
       { source: "/fr/:path*", destination: "/fr/404.html" }
     ]);
