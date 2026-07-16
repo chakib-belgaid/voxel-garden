@@ -67,14 +67,14 @@ describe("garden portfolio boundary", () => {
     expect(document.querySelector('.carbon-footprint-meter[data-mode="game"]')).toBeTruthy();
     const modes = screen.getByRole("navigation", { name: "Experience mode" });
     expect(modes.querySelector('a[href="/ascii"]')).toBeTruthy();
-    expect(modes.querySelector('a[href="/"]')).toBeTruthy();
-    expect(modes.querySelector('a[href="/garden"][aria-current="page"]')).toBeTruthy();
-    expect(screen.getByRole("link", { name: "LIVE 3D" })).toBeTruthy();
+    expect(modes.querySelector('a[href="/live"]')).toBeTruthy();
+    expect(modes.querySelector('a[href="/game"][aria-current="page"]')).toBeTruthy();
+    expect(screen.getByRole("link", { name: "GAME" })).toBeTruthy();
   });
 
   it("links the title and live garden HUD back to the recruiter portfolio", () => {
     const view = render(createElement(GameUI));
-    expect(screen.getByRole("link", { name: "Portfolio" }).getAttribute("href")).toBe("/");
+    expect(screen.getByRole("link", { name: "Portfolio" }).getAttribute("href")).toBe("/live");
 
     view.unmount();
     act(() => useGameStore.getState().startNewGame());
@@ -82,7 +82,7 @@ describe("garden portfolio boundary", () => {
 
     const portfolioLinks = screen.getAllByRole("link", { name: "Portfolio" });
     expect(portfolioLinks.length).toBeGreaterThan(0);
-    expect(portfolioLinks.every((link) => link.getAttribute("href") === "/")).toBe(true);
+    expect(portfolioLinks.every((link) => link.getAttribute("href") === "/live")).toBe(true);
   });
 
   it("keeps gameplay actions separate from recruiter case-study links", () => {

@@ -66,8 +66,8 @@ function renderDocument(
   return withRouteMarker.replace(rootPattern, `$1${rendered.appHtml}$2`);
 }
 
-function gardenHead(): string {
-  const canonical = `${CANONICAL_ORIGIN}/garden`;
+function gameHead(): string {
+  const canonical = `${CANONICAL_ORIGIN}/game`;
   const socialImage = `${CANONICAL_ORIGIN}/assets/generated/voxel-garden-key-art.jpg`;
   const description = "Systems Garden — a playable voxel portfolio about intelligent, efficient, energy-aware systems.";
   const jsonLd = {
@@ -79,7 +79,7 @@ function gardenHead(): string {
     creator: {
       "@type": "Person",
       name: "Chakib Belgaid",
-      url: `${CANONICAL_ORIGIN}/`
+      url: `${CANONICAL_ORIGIN}/live`
     }
   };
 
@@ -117,7 +117,7 @@ function asciiHead(): string {
     creator: {
       "@type": "Person",
       name: "Chakib Belgaid",
-      url: `${CANONICAL_ORIGIN}/`
+      url: `${CANONICAL_ORIGIN}/live`
     }
   };
 
@@ -188,7 +188,7 @@ function redirectDocument(destination: string): string {
 async function verifySitemap(): Promise<void> {
   const sitemap = await readFile(resolve(distDirectory, "sitemap.xml"), "utf8");
   for (const route of PUBLIC_SITEMAP_PATHS) {
-    const canonical = route === "/" ? `${CANONICAL_ORIGIN}/` : `${CANONICAL_ORIGIN}${route}`;
+    const canonical = `${CANONICAL_ORIGIN}${route}`;
     if (!sitemap.includes(`<loc>${canonical}</loc>`)) {
       throw new Error(`Sitemap is missing ${canonical}.`);
     }
@@ -200,13 +200,14 @@ async function prerender(): Promise<void> {
   const template = await readFile(templatePath, "utf8");
   const renderer = await loadServerRenderer();
 
-  const garden = renderDocument(template, "/garden", {
+  const game = renderDocument(template, "/game", {
     appHtml: "",
-    head: gardenHead(),
+    head: gameHead(),
     htmlAttributes: { lang: "en" }
   });
-  await writeOutput("garden/index.html", garden);
-  await writeOutput("fr/garden/index.html", redirectDocument("/garden"));
+  await writeOutput("game/index.html", game);
+  await writeOutput("garden/index.html", redirectDocument("/game"));
+  await writeOutput("fr/garden/index.html", redirectDocument("/game"));
 
   const asciiTemplate = template.replace(
     /\s*<link\b[^>]*\brel=["']icon["'][^>]*>/gi,
@@ -228,9 +229,12 @@ async function prerender(): Promise<void> {
     await writeOutput(route.output, document);
   }
 
+  await writeOutput("index.html", redirectDocument("/live"));
+  await writeOutput("fr/index.html", redirectDocument("/fr/live"));
+
   await verifySitemap();
   await rm(serverDirectory, { recursive: true, force: true });
-  console.log(`Prerendered ${RECRUITER_ROUTES.length} recruiter documents, /garden and /ascii SPA shells, plus the /fr/garden redirect.`);
+  console.log(`Prerendered ${RECRUITER_ROUTES.length} recruiter documents, /game and /ascii SPA shells, plus legacy route redirects.`);
 }
 
 await prerender();

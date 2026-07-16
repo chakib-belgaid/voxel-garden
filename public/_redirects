@@ -1,5 +1,8 @@
-/fr/garden /garden 301!
+/ /live 301!
+/fr /fr/live 301!
+/garden /game 301!
+/fr/garden /game 301!
 /ascii /ascii/index.html 200
-/garden/* /garden/index.html 200
+/game/* /game/index.html 200
 /fr/* /fr/404.html 404
 /* /404.html 404

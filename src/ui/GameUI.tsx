@@ -570,7 +570,7 @@ function ProgressHUD({
         <button type="button" onClick={onPause} aria-label="Pause game" title="Pause (P)">
           <Pause />
         </button>
-        <a className="portfolio-action" href="/" aria-label="Portfolio" title="Return to portfolio">
+        <a className="portfolio-action" href="/live" aria-label="Portfolio" title="Return to portfolio">
           <ArrowLeft aria-hidden="true" /> <span>PORTFOLIO</span>
         </a>
       </div>
@@ -650,7 +650,7 @@ function MobileHud({
         <button type="button" onClick={onOpenLog} aria-label="Field log">
           <BookOpen /> Field log
         </button>
-        <a href="/" aria-label="Portfolio">
+        <a href="/live" aria-label="Portfolio">
           <ArrowLeft aria-hidden="true" /> Portfolio
         </a>
       </div>
@@ -698,7 +698,7 @@ function BirdViewHUD({
         >
           <ArrowDown aria-hidden="true" /> RETURN TO GARDEN
         </button>
-        <a className="bird-portfolio-action" href="/" aria-label="Portfolio">
+        <a className="bird-portfolio-action" href="/live" aria-label="Portfolio">
           <ArrowLeft aria-hidden="true" /> PORTFOLIO
         </a>
       </div>
@@ -945,7 +945,7 @@ function TitleScreen({
           <button className="icon-text-button" type="button" onClick={onSettings} aria-label="Settings">
             <Settings aria-hidden="true" /> SETTINGS
           </button>
-          <a className="icon-text-button" href="/" aria-label="Portfolio">
+          <a className="icon-text-button" href="/live" aria-label="Portfolio">
             <ArrowLeft aria-hidden="true" /> PORTFOLIO
           </a>
         </div>
@@ -1401,7 +1401,7 @@ function PauseMenu({
         <button className="pixel-button pixel-button--primary" type="button" onClick={onResume}><Play /> RESUME GARDEN</button>
         <button className="pixel-button" type="button" onClick={onFieldLog} aria-label="Field log"><BookOpen /> FIELD LOG</button>
         <button className="pixel-button" type="button" onClick={onSettings} aria-label="Settings"><Settings /> SETTINGS</button>
-        <a className="pixel-button" href="/" aria-label="Portfolio"><ArrowLeft /> PORTFOLIO</a>
+        <a className="pixel-button" href="/live" aria-label="Portfolio"><ArrowLeft /> PORTFOLIO</a>
         <button className="icon-text-button danger-link" type="button" onClick={onReset}><RotateCcw /> RESET PROGRESS</button>
       </div>
       <p className="pause-hint"><kbd>ESC</kbd> RESUME</p>
@@ -1458,7 +1458,7 @@ function CompletionScreen({ onContinue, onReset }: { onContinue: () => void; onR
         </div>
         <div className="ending-actions">
           <button className="pixel-button pixel-button--primary" type="button" onClick={onContinue} autoFocus><Sprout /> WALK THE RESTORED GARDEN</button>
-          <a className="pixel-button" href="/" aria-label="Portfolio"><ArrowLeft /> PORTFOLIO</a>
+          <a className="pixel-button" href="/live" aria-label="Portfolio"><ArrowLeft /> PORTFOLIO</a>
           <button className="icon-text-button" type="button" onClick={onReset}><RefreshCcw /> PLAY AGAIN</button>
         </div>
       </section>

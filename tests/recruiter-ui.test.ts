@@ -9,7 +9,7 @@ afterEach(cleanup);
 
 describe("recruiter portfolio UI", () => {
   it("renders the evidence-first English recruiter flow with live destinations", () => {
-    render(createElement(RecruiterRouter, { route: "/" }));
+    render(createElement(RecruiterRouter, { route: "/live" }));
 
     expect(screen.getByRole("heading", {
       level: 1,
@@ -36,7 +36,8 @@ describe("recruiter portfolio UI", () => {
     const modes = screen.getByRole("navigation", { name: "Experience mode" });
     expect(within(modes).getByRole("link", { name: "ASCII" }).getAttribute("href")).toBe("/ascii");
     expect(within(modes).getByRole("link", { name: "LIVE" }).getAttribute("aria-current")).toBe("page");
-    expect(within(modes).getByRole("link", { name: "LIVE 3D" }).getAttribute("href")).toBe("/garden");
+    expect(within(modes).getByRole("link", { name: "LIVE" }).getAttribute("href")).toBe("/live");
+    expect(within(modes).getByRole("link", { name: "GAME" }).getAttribute("href")).toBe("/game");
   });
 
   it("keeps the language switch on the matching French case study", () => {
@@ -44,9 +45,9 @@ describe("recruiter portfolio UI", () => {
 
     expect(screen.getByRole("heading", { level: 1, name: "Whispbook" })).toBeTruthy();
     expect(screen.getByRole("link", { name: "English" }).getAttribute("href")).toBe("/work/whispbook");
-    expect(screen.getByRole("link", { name: "Projets" }).getAttribute("href")).toBe("/fr#work");
+    expect(screen.getByRole("link", { name: "Projets" }).getAttribute("href")).toBe("/fr/live#work");
     expect(document.querySelector<HTMLAnchorElement>('a[download][href$="-fr.pdf"]')).toBeTruthy();
-    expect(screen.getByRole("link", { name: "LIVE" }).getAttribute("href")).toBe("/fr");
+    expect(screen.getByRole("link", { name: "LIVE" }).getAttribute("href")).toBe("/fr/live");
   });
 
   it("renders every case-study section in the shared typed order", () => {
@@ -63,7 +64,7 @@ describe("recruiter portfolio UI", () => {
     ]);
     expect(screen.getByText("Linux RAPL powercap or deterministic source")).toBeTruthy();
     expect(document.querySelector('a[href="#work"]')).toBeNull();
-    expect(document.querySelector('a[href="/#work"]')).toBeTruthy();
+    expect(document.querySelector('a[href="/live#work"]')).toBeTruthy();
   });
 
   it("localizes unknown routes without pulling in the game surface", () => {

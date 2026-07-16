@@ -1,5 +1,5 @@
-const CACHE_NAME = "systems-garden-v4";
-const GARDEN_SHELL = "/garden/index.html";
+const CACHE_NAME = "systems-garden-v5";
+const GARDEN_SHELL = "/game/index.html";
 const STATIC_SHELL = ["/favicon.svg", "/assets/generated/voxel-garden-key-art.jpg"];
 
 const localPath = (value, base = self.location.origin) => {
@@ -28,7 +28,7 @@ async function precacheAppShell() {
 
   const html = await indexResponse.clone().text();
   await Promise.all([
-    cache.put("/garden", indexResponse.clone()),
+    cache.put("/game", indexResponse.clone()),
     cache.put(GARDEN_SHELL, indexResponse.clone()),
   ]);
 

@@ -115,7 +115,7 @@ function parseRoute(route: string):
   const path = normalizeRoute(route);
   const locale: Locale = path === "/fr" || path.startsWith("/fr/") ? "fr" : "en";
 
-  if (path === "/" || path === "/fr") return { kind: "home", locale };
+  if (path === "/live" || path === "/fr/live") return { kind: "home", locale };
 
   const match = path.match(/^\/(?:fr\/)?work\/(whispbook|wattch)$/);
   if (match) return { kind: "project", locale, slug: match[1] as ProjectSlug };
@@ -166,7 +166,7 @@ function Header({
           <a href={sectionLink("work")}>{copy.nav.work}</a>
           <a href={sectionLink("experience")}>{copy.nav.experience}</a>
           <a href={sectionLink("about")}>{copy.nav.about}</a>
-          <a href="/garden">{copy.nav.garden}</a>
+          <a href="/game">{copy.nav.garden}</a>
           <a href={resumePdfPath(locale)} download>{copy.nav.cv}</a>
           <a href={alternatePath(locale, slug)} lang={getAlternateLocale(locale)} aria-label={copy.nav.languageLabel}>
             {locale === "en" ? "FR" : "EN"}
@@ -293,7 +293,7 @@ function HomePage({ locale }: { readonly locale: Locale }) {
               <a className="portfolio-button portfolio-button--gold" href={resumePdfPath(locale)} download>
                 {copy.hero.secondaryCta} <Arrow />
               </a>
-              <a className="portfolio-text-link" href="/garden">{copy.hero.tertiaryCta} <Arrow /></a>
+              <a className="portfolio-text-link" href="/game">{copy.hero.tertiaryCta} <Arrow /></a>
             </div>
           </section>
           <ImpactRail locale={locale} metrics={copy.impact} />
@@ -363,7 +363,7 @@ function HomePage({ locale }: { readonly locale: Locale }) {
               <p>{copy.garden.summary}</p>
               <span className="portfolio-garden__note">{copy.garden.languageNote}</span>
               <div className="portfolio-actions">
-                <a className="portfolio-button" href="/garden">{copy.garden.cta} <Arrow /></a>
+                <a className="portfolio-button" href="/game">{copy.garden.cta} <Arrow /></a>
               </div>
             </div>
             <figure className="portfolio-media">

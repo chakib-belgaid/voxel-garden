@@ -16,7 +16,7 @@ export interface RecruiterRouteRecord {
   readonly socialImage?: string;
 }
 
-const HOME_ALTERNATES = { en: "/", fr: "/fr" } as const;
+const HOME_ALTERNATES = { en: "/live", fr: "/fr/live" } as const;
 const WHISPBOOK_ALTERNATES = {
   en: "/work/whispbook",
   fr: "/fr/work/whispbook"
@@ -29,8 +29,8 @@ const NOT_FOUND_ALTERNATES = { en: "/404", fr: "/fr/404" } as const;
 
 export const RECRUITER_ROUTES = [
   {
-    path: "/",
-    output: "index.html",
+    path: "/live",
+    output: "live/index.html",
     locale: "en",
     kind: "home",
     title: siteContent.en.metadata.title,
@@ -39,8 +39,8 @@ export const RECRUITER_ROUTES = [
     socialImage: "/social/home-en.svg"
   },
   {
-    path: "/fr",
-    output: "fr/index.html",
+    path: "/fr/live",
+    output: "fr/live/index.html",
     locale: "fr",
     kind: "home",
     title: siteContent.fr.metadata.title,
@@ -111,13 +111,13 @@ export const RECRUITER_ROUTES = [
 export type RecruiterRoutePath = (typeof RECRUITER_ROUTES)[number]["path"];
 
 export const PUBLIC_SITEMAP_PATHS = [
-  "/",
-  "/fr",
+  "/live",
+  "/fr/live",
   "/work/whispbook",
   "/fr/work/whispbook",
   "/work/wattch",
   "/fr/work/wattch",
-  "/garden",
+  "/game",
   "/ascii"
 ] as const;
 

@@ -8,34 +8,91 @@ import {
   createVisitTransferredBytesAccumulator,
   type VisitTransferredBytesAccumulator
 } from "./transfer-energy";
+import type { ExperienceMode } from "./ExperienceModeSwitch";
 
-const VISIT_TRANSFER_STORAGE_KEY = "systems-garden:visit-transfer-bytes:v1";
+const MODE_TRANSFER_STORAGE_KEY = "systems-garden:mode-transfer-bytes:v1";
+const EXPERIENCE_MODES: readonly ExperienceMode[] = ["ascii", "live", "game"];
 
-let accumulateDocumentVisitBytes: VisitTransferredBytesAccumulator | null = null;
+export type ModeTransferredBytes = Partial<Record<ExperienceMode, number>>;
 
-function readPreviousViewBytes(): number {
+export interface PageFootprintSnapshot {
+  readonly current: TransferFootprint | null;
+  readonly byMode: Readonly<Partial<Record<ExperienceMode, TransferFootprint>>>;
+}
+
+const documentAccumulators = new Map<ExperienceMode, VisitTransferredBytesAccumulator>();
+
+export function parseModeTransferredBytes(raw: string | null): ModeTransferredBytes {
+  if (!raw) return {};
+
   try {
-    return Number(window.sessionStorage.getItem(VISIT_TRANSFER_STORAGE_KEY) ?? 0);
+    const parsed = JSON.parse(raw) as unknown;
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
+
+    const result: ModeTransferredBytes = {};
+    for (const mode of EXPERIENCE_MODES) {
+      const value = (parsed as Record<string, unknown>)[mode];
+      if (typeof value === "number" && Number.isFinite(value) && value > 0) {
+        result[mode] = Math.round(value);
+      }
+    }
+    return result;
   } catch {
-    return 0;
+    return {};
   }
 }
 
-function persistVisitBytes(bytes: number): void {
+export function updateModeTransferredBytes(
+  current: ModeTransferredBytes,
+  mode: ExperienceMode,
+  bytes: number
+): ModeTransferredBytes {
+  return { ...current, [mode]: Math.max(0, Math.round(bytes)) };
+}
+
+function readModeBytes(): ModeTransferredBytes {
   try {
-    window.sessionStorage.setItem(VISIT_TRANSFER_STORAGE_KEY, String(bytes));
+    return parseModeTransferredBytes(
+      window.sessionStorage.getItem(MODE_TRANSFER_STORAGE_KEY)
+    );
+  } catch {
+    return {};
+  }
+}
+
+function persistModeBytes(mode: ExperienceMode, bytes: number): ModeTransferredBytes {
+  const totals = updateModeTransferredBytes(readModeBytes(), mode, bytes);
+  try {
+    window.sessionStorage.setItem(MODE_TRANSFER_STORAGE_KEY, JSON.stringify(totals));
   } catch {
     // The live measurement still works when session storage is unavailable.
   }
+  return totals;
 }
 
-function getDocumentVisitAccumulator(): VisitTransferredBytesAccumulator {
-  accumulateDocumentVisitBytes ??= createVisitTransferredBytesAccumulator(readPreviousViewBytes());
-  return accumulateDocumentVisitBytes;
+function getDocumentModeAccumulator(mode: ExperienceMode): VisitTransferredBytesAccumulator {
+  const existing = documentAccumulators.get(mode);
+  if (existing) return existing;
+
+  const accumulator = createVisitTransferredBytesAccumulator(readModeBytes()[mode] ?? 0);
+  documentAccumulators.set(mode, accumulator);
+  return accumulator;
 }
 
-export function usePageFootprint(): TransferFootprint | null {
-  const [footprint, setFootprint] = useState<TransferFootprint | null>(null);
+function estimateModes(bytesByMode: ModeTransferredBytes): PageFootprintSnapshot["byMode"] {
+  return Object.fromEntries(
+    EXPERIENCE_MODES.flatMap((mode) => {
+      const bytes = bytesByMode[mode];
+      return bytes === undefined ? [] : [[mode, estimateTransferFootprint(bytes)]];
+    })
+  );
+}
+
+export function usePageFootprint(mode: ExperienceMode = "live"): PageFootprintSnapshot {
+  const [snapshot, setSnapshot] = useState<PageFootprintSnapshot>({
+    current: null,
+    byMode: {}
+  });
 
   useEffect(() => {
     let animationFrame = 0;
@@ -44,11 +101,14 @@ export function usePageFootprint(): TransferFootprint | null {
     const measure = () => {
       window.cancelAnimationFrame(animationFrame);
       animationFrame = window.requestAnimationFrame(() => {
-        const visitBytes = getDocumentVisitAccumulator()(
+        const modeBytes = getDocumentModeAccumulator(mode)(
           readPageTransferredBytes(window.performance)
         );
-        persistVisitBytes(visitBytes);
-        setFootprint(estimateTransferFootprint(visitBytes));
+        const totals = persistModeBytes(mode, modeBytes);
+        setSnapshot({
+          current: estimateTransferFootprint(modeBytes),
+          byMode: estimateModes(totals)
+        });
       });
     };
 
@@ -72,7 +132,7 @@ export function usePageFootprint(): TransferFootprint | null {
       window.removeEventListener("load", measure);
       observer?.disconnect();
     };
-  }, []);
+  }, [mode]);
 
-  return footprint;
+  return snapshot;
 }

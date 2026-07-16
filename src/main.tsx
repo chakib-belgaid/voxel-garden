@@ -9,8 +9,10 @@ const path = window.location.pathname.length > 1
   ? window.location.pathname.replace(/\/+$/, "")
   : window.location.pathname;
 
-if (path === "/fr/garden") {
-  window.location.replace("/garden");
+if (path === "/" || path === "/fr") {
+  window.location.replace(path === "/fr" ? "/fr/live" : "/live");
+} else if (path === "/garden" || path === "/fr/garden") {
+  window.location.replace("/game");
 } else if (path === "/ascii") {
   document.documentElement.lang = "en";
   document.body.classList.add("ascii-route");
@@ -21,7 +23,7 @@ if (path === "/fr/garden") {
       <AsciiGardenApp />
     </React.StrictMode>
   );
-} else if (path === "/garden") {
+} else if (path === "/game") {
   document.documentElement.lang = "en";
   document.body.classList.add("garden-route");
 
@@ -35,7 +37,7 @@ if (path === "/fr/garden") {
 
   if (import.meta.env.PROD && "serviceWorker" in navigator) {
     window.addEventListener("load", () => {
-      void navigator.serviceWorker.register("/sw.js", { scope: "/garden" }).catch(() => {
+      void navigator.serviceWorker.register("/sw.js", { scope: "/game" }).catch(() => {
         // The game remains fully usable online when service-worker registration is unavailable.
       });
     });

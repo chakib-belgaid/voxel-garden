@@ -15,8 +15,8 @@ const workspaceRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 describe("static recruiter route contract", () => {
   it("defines every requested recruiter document and localized 404", () => {
     expect(RECRUITER_ROUTES.map((route) => route.path)).toEqual([
-      "/",
-      "/fr",
+      "/live",
+      "/fr/live",
       "/work/whispbook",
       "/fr/work/whispbook",
       "/work/wattch",
@@ -31,22 +31,23 @@ describe("static recruiter route contract", () => {
 
   it("keeps sitemap routes public while excluding not-found and the French garden redirect", () => {
     expect(PUBLIC_SITEMAP_PATHS).toEqual([
-      "/",
-      "/fr",
+      "/live",
+      "/fr/live",
       "/work/whispbook",
       "/fr/work/whispbook",
       "/work/wattch",
       "/fr/work/wattch",
-      "/garden",
+      "/game",
       "/ascii"
     ]);
-    expect(PUBLIC_SITEMAP_PATHS).not.toContain("/fr/garden");
+    expect(PUBLIC_SITEMAP_PATHS).not.toContain("/garden");
   });
 
   it("maps unknown paths to the matching localized not-found route", () => {
     expect(getRecruiterRoute("/unknown").path).toBe("/404");
     expect(getRecruiterRoute("/fr/introuvable").path).toBe("/fr/404");
     expect(getRecruiterRoute("/work/wattch/").path).toBe("/work/wattch");
+    expect(getRecruiterRoute("/live/").path).toBe("/live");
   });
 });
 
@@ -60,9 +61,7 @@ describe("React server renderer", () => {
       expect(rendered.htmlAttributes.lang).toBe(route.locale);
       expect(rendered.head).toContain(`<title>${route.title}</title>`);
       expect(rendered.head).toContain(
-        `rel="canonical" href="${
-          route.path === "/" ? `${CANONICAL_ORIGIN}/` : `${CANONICAL_ORIGIN}${route.path}`
-        }"`
+        `rel="canonical" href="${CANONICAL_ORIGIN}${route.path}"`
       );
       expect(rendered.head).toContain('hreflang="en"');
       expect(rendered.head).toContain('hreflang="fr"');
@@ -106,12 +105,12 @@ describe("static discovery and deployment files", () => {
   it("lists every indexable route in the sitemap", async () => {
     const sitemap = await readFile(resolve(workspaceRoot, "public/sitemap.xml"), "utf8");
     for (const path of PUBLIC_SITEMAP_PATHS) {
-      const canonical = path === "/" ? `${CANONICAL_ORIGIN}/` : `${CANONICAL_ORIGIN}${path}`;
+      const canonical = `${CANONICAL_ORIGIN}${path}`;
       expect(sitemap).toContain(`<loc>${canonical}</loc>`);
     }
   });
 
-  it("uses modern Vercel routing and limits the SPA fallback to the garden", async () => {
+  it("uses modern Vercel routing and limits the SPA fallback to the game", async () => {
     const vercel = JSON.parse(
       await readFile(resolve(workspaceRoot, "vercel.json"), "utf8")
     ) as {
@@ -121,7 +120,10 @@ describe("static discovery and deployment files", () => {
     };
 
     expect(vercel.redirects).toContainEqual(
-      expect.objectContaining({ source: "/fr/garden", destination: "/garden", permanent: true })
+      expect.objectContaining({ source: "/", destination: "/live", permanent: true })
+    );
+    expect(vercel.redirects).toContainEqual(
+      expect.objectContaining({ source: "/garden", destination: "/game", permanent: true })
     );
     expect(vercel.redirects).toContainEqual(
       expect.objectContaining({ destination: "https://chakib-belgaid.github.io/$1", permanent: true })
@@ -129,7 +131,7 @@ describe("static discovery and deployment files", () => {
     expect(vercel.routes).toBeUndefined();
     expect(vercel.rewrites).toEqual([
       { source: "/ascii", destination: "/ascii/index.html" },
-      { source: "/garden/:path*", destination: "/garden/index.html" },
+      { source: "/game/:path*", destination: "/game/index.html" },
       { source: "/fr/:path*", destination: "/fr/404.html" }
     ]);
   });

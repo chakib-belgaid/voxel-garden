@@ -3,8 +3,23 @@
   publish = "dist"
 
 [[redirects]]
+  from = "/"
+  to = "/live"
+  status = 301
+
+[[redirects]]
+  from = "/fr"
+  to = "/fr/live"
+  status = 301
+
+[[redirects]]
+  from = "/garden"
+  to = "/game"
+  status = 301
+
+[[redirects]]
   from = "/fr/garden"
-  to = "/garden"
+  to = "/game"
   status = 301
 
 [[redirects]]
@@ -13,8 +28,8 @@
   status = 200
 
 [[redirects]]
-  from = "/garden/*"
-  to = "/garden/index.html"
+  from = "/game/*"
+  to = "/game/index.html"
   status = 200
 
 [[redirects]]

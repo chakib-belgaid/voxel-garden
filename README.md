@@ -11,7 +11,13 @@ bun install
 bun run dev
 ```
 
-Open `http://127.0.0.1:4173` (Vite will select the next free port when needed).
+Open one of the explicit experience routes (Vite will select the next free port when needed):
+
+- `http://127.0.0.1:4173/ascii` — text-only experience
+- `http://127.0.0.1:4173/live` — recruiter-facing portfolio
+- `http://127.0.0.1:4173/game` — interactive 3D garden
+
+The shared meter keeps an independent, transferred-data-based energy estimate for each mode so the cost difference remains visible while switching routes. `/` and `/garden` remain compatibility redirects to `/live` and `/game`.
 
 ### Controls
 

@@ -5,7 +5,8 @@
   --mode-switch-text: var(--portfolio-muted, var(--cream-400, #aaa093));
   --mode-switch-active: var(--portfolio-lime, var(--lime-400, #9bd42b));
   display: inline-grid;
-  min-width: 196px;
+  width: 100%;
+  min-width: 246px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   border: 1px solid var(--mode-switch-border);
   background: var(--mode-switch-bg);
@@ -16,16 +17,39 @@
 
 .experience-mode-switch a {
   display: flex;
-  min-height: 28px;
+  min-height: 42px;
+  flex-direction: column;
+  gap: 4px;
   align-items: center;
   justify-content: center;
-  padding: 5px 8px;
+  padding: 6px 8px;
   color: inherit;
   font-size: 8px;
   font-weight: 600;
   letter-spacing: 0.08em;
   line-height: 1;
   text-decoration: none;
+}
+
+.experience-mode-switch a > span {
+  line-height: 1;
+}
+
+.experience-mode-switch a > small {
+  overflow: hidden;
+  max-width: 100%;
+  color: color-mix(in srgb, currentColor 72%, transparent);
+  font-size: 7px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
+  text-overflow: ellipsis;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.experience-mode-switch a[data-measured="false"] > small {
+  opacity: 0.66;
 }
 
 .experience-mode-switch a + a {
@@ -49,10 +73,10 @@
   --mode-switch-border: var(--ascii-line-bright, #397a43);
   --mode-switch-text: var(--ascii-muted, #6f8972);
   --mode-switch-active: var(--ascii-green, #9cff57);
-  min-width: 224px;
+  min-width: 246px;
 }
 
 .experience-mode-switch--ascii a {
-  min-height: 26px;
+  min-height: 42px;
   font-size: 7px;
 }

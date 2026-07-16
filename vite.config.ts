@@ -6,7 +6,8 @@ const previewDirectoryRoutes = new Set([
   ...RECRUITER_ROUTES
     .filter((route) => route.output.endsWith("/index.html"))
     .map((route) => route.path),
-  "/garden"
+  "/ascii",
+  "/game"
 ]);
 
 function servePrerenderedPreviewRoutes(): Plugin {

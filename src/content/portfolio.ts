@@ -385,8 +385,8 @@ export function getProject(locale: Locale, slug: ProjectSlug): ProjectCaseStudy 
   return projects[locale][slug];
 }
 
-export function getHomePath(locale: Locale): "/" | "/fr" {
-  return locale === "fr" ? "/fr" : "/";
+export function getHomePath(locale: Locale): "/live" | "/fr/live" {
+  return locale === "fr" ? "/fr/live" : "/live";
 }
 
 export function getProjectPath(locale: Locale, slug: ProjectSlug): string {

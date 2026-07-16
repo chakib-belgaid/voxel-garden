@@ -2,21 +2,25 @@ import "./experience-mode-switch.css";
 
 export type ExperienceMode = "ascii" | "live" | "game";
 
-const modes = [
+export const EXPERIENCE_MODES = [
   { id: "ascii", label: "ASCII", href: "/ascii" },
-  { id: "live", label: "LIVE", href: "/" },
-  { id: "game", label: "LIVE 3D", href: "/garden" }
+  { id: "live", label: "LIVE", href: "/live" },
+  { id: "game", label: "GAME", href: "/game" }
 ] as const;
 
 export function ExperienceModeSwitch({
   activeMode,
   ariaLabel = "Experience mode",
-  liveHref = "/",
+  liveHref = "/live",
+  energyByMode = {},
+  unmeasuredLabel = "Not measured",
   variant = "default"
 }: {
   readonly activeMode: ExperienceMode;
   readonly ariaLabel?: string;
   readonly liveHref?: string;
+  readonly energyByMode?: Readonly<Partial<Record<ExperienceMode, string>>>;
+  readonly unmeasuredLabel?: string;
   readonly variant?: "default" | "ascii";
 }) {
   return (
@@ -24,14 +28,16 @@ export function ExperienceModeSwitch({
       className={`experience-mode-switch experience-mode-switch--${variant}`}
       aria-label={ariaLabel}
     >
-      {modes.map((mode) => (
+      {EXPERIENCE_MODES.map((mode) => (
         <a
           href={mode.id === "live" ? liveHref : mode.href}
           data-mode={mode.id}
+          data-measured={energyByMode[mode.id] ? "true" : "false"}
           aria-current={mode.id === activeMode ? "page" : undefined}
           key={mode.id}
         >
-          {mode.label}
+          <span>{mode.label}</span>
+          <small aria-hidden="true">{energyByMode[mode.id] ?? unmeasuredLabel}</small>
         </a>
       ))}
     </nav>

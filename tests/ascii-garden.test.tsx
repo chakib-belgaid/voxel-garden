@@ -26,8 +26,8 @@ describe("ASCII systems garden", () => {
 
     const modes = screen.getByRole("navigation", { name: "Experience mode" });
     expect(within(modes).getByRole("link", { name: "ASCII" }).getAttribute("aria-current")).toBe("page");
-    expect(within(modes).getByRole("link", { name: "LIVE" }).getAttribute("href")).toBe("/");
-    expect(within(modes).getByRole("link", { name: "GAME" }).getAttribute("href")).toBe("/garden");
+    expect(within(modes).getByRole("link", { name: "LIVE" }).getAttribute("href")).toBe("/live");
+    expect(within(modes).getByRole("link", { name: "GAME" }).getAttribute("href")).toBe("/game");
   });
 
   it("uses 7-bit ASCII for every animated and decorative text diagram", () => {

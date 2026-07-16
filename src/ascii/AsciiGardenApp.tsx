@@ -145,7 +145,7 @@ function AsciiRule({ label }: { readonly label: string }) {
 
 function EnergyDiagram() {
   const { frame, running, setRunning } = useAsciiAnimation();
-  const footprint = usePageFootprint();
+  const { current: footprint } = usePageFootprint("ascii");
   const diagram = useMemo(() => buildEnergyFrame(frame), [frame]);
 
   return (
@@ -249,7 +249,7 @@ function Hero() {
         </blockquote>
         <div className="ascii-actions">
           <a className="ascii-button ascii-button--primary" href="#systems">[ VIEW SYSTEMS ]</a>
-          <a className="ascii-button" href="/garden">[ OPEN 3D GARDEN ]</a>
+          <a className="ascii-button" href="/game">[ OPEN 3D GARDEN ]</a>
         </div>
       </div>
       <EnergyDiagram />
@@ -347,7 +347,7 @@ function Contact() {
           <a href={portfolioContacts.email}>[ EMAIL ]</a>
           <a href={portfolioContacts.github} target="_blank" rel="noopener noreferrer">[ GITHUB ]</a>
           <a href={portfolioContacts.linkedin} target="_blank" rel="noopener noreferrer">[ LINKEDIN ]</a>
-          <a href="/">[ STANDARD SITE ]</a>
+          <a href="/live">[ STANDARD SITE ]</a>
         </div>
       </div>
     </section>
