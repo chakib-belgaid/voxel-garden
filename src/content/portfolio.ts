@@ -77,7 +77,7 @@ export const evidenceReferences = {
     label: "Whispbook public source repository",
     source: "whispbook / README.md and backend/app",
     sourceUrl: "https://github.com/chakib-belgaid/whispbook",
-    note: "Evidence for the current React/FastAPI self-hosted studio, local TTS and export workflow.",
+    note: "Evidence for the current React/FastAPI studio, document workflow, local TTS engines, character casts, streaming generation, subtitles and M4B export.",
   },
   "repo:whispbook-training": {
     label: "Whispbook speaker-attribution training scaffold",
@@ -87,14 +87,15 @@ export const evidenceReferences = {
   },
   "repo:wattch": {
     label: "Wattch public source repository",
-    source: "Wattch / README.md, crates and proto",
+    source: "Wattch / README.md, crates, proto and tests",
     sourceUrl: "https://github.com/chakib-belgaid/Wattch",
-    note: "Evidence for the original protobuf-framed RAPL daemon/CLI prototype.",
+    note: "Evidence for the public v0.1-alpha Rust RAPL daemon/CLI, protobuf framing, Unix-socket protocol and deterministic fake backend.",
   },
   "repo:wattch-core": {
-    label: "Wattch Core local source repository",
-    source: "wattch-core / README.md, docs and crates",
-    note: "Evidence for the protocol-first rewrite, deterministic daemon, replayable traces and privilege boundary; the local origin URL was not public during the audit.",
+    label: "Wattch deterministic validation",
+    source: "Wattch / README.md, docs and tests",
+    sourceUrl: "https://github.com/chakib-belgaid/Wattch",
+    note: "Evidence for protocol-first validation, deterministic fake-source testing and reproducibility-focused development in the public Wattch repository.",
   },
 } as const satisfies Record<string, EvidenceReference>;
 
@@ -214,29 +215,43 @@ const enProjects: Record<ProjectSlug, ProjectCaseStudy> = {
     locale: "en",
     sectionOrder: projectSectionOrder,
     name: "Whispbook",
-    eyebrow: "Local-first AI audiobook workflows",
-    summary: "A self-hosted React and FastAPI audiobook studio, paired with research tooling for schema-constrained speaker attribution and local LoRA evaluation.",
-    problem: "Turning a manuscript into editable, chaptered audio involves document cleanup, voice control, long-running generation, subtitles and character attribution without sending the working corpus to a hosted black box.",
-    role: "Chakib owns the product workflow and backend/frontend implementation, and built the separate attribution research path for controlled context, structured tool outputs, local LoRA adapters and evaluation reports.",
+    eyebrow: "Local-first audiobook production",
+    summary: "A self-hosted React and FastAPI audiobook studio that turns local documents into editable, multi-voice audiobooks with local TTS, character casts, subtitles and M4B export.",
+    problem: "Turning a manuscript into a polished audiobook requires document cleanup, voice control, long-running generation, subtitles and packaging while keeping the working corpus and media under the user's control.",
+    role: "Chakib owns the product workflow and backend/frontend implementation, including document ingestion, editing, local TTS integration, character voice controls, generation jobs and audiobook packaging; speaker-attribution model work remains a separate research track.",
     architecture: {
-      overview: "The product path converts local documents into editable chapters, snapshots book state and TTS settings, then generates chapter audio, subtitles and an M4B package. The research path prepares speaker candidates and surrounding evidence for schema-constrained attribution and evaluates local adapters separately.",
-      flow: ["Local selectable-text document", "Chapter and paragraph workspace", "Planner/coordinator workflow with bounded context", "Speaker attribution / voice mapping", "Local TTS generation jobs", "Chapter audio + VTT/SRT + M4B export"],
+      overview: "Whispbook converts local selectable-text documents into editable chapters and paragraphs. Users choose chapters, voices and narration settings, preview paragraphs, assign Chatterbox Turbo character voices and inline paralinguistic cues, then run background synthesis while listening to completed paragraphs. The backend packages chapter audio, VTT/SRT subtitles and a final M4B audiobook.",
+      flow: ["Local selectable-text document", "Editable chapters and paragraphs", "Voice/style and character assignments", "Paragraph preview", "Background local TTS generation", "Chapter audio + VTT/SRT + M4B export"],
     },
-    responsibilities: ["Built the React writing desk and FastAPI storage/job APIs.", "Integrated local/open TTS engines, preview, generation and subtitle packaging.", "Defined structured attribution/export schemas and candidate-aware context preparation.", "Built MLX-LM and Unsloth LoRA asset generation plus checkpoint evaluation-report tooling."],
+    responsibilities: [
+      "Built the React writing desk and FastAPI storage/job APIs.",
+      "Integrated Kokoro, Chatterbox and Chatterbox Turbo for preview and full-book generation.",
+      "Added custom narration styles, Turbo character casts, highlighted voice ranges and inline paralinguistic tags.",
+      "Built chapter audio, VTT/SRT subtitle and M4B packaging plus exportable Python generation scripts.",
+      "Maintained the separate schema-constrained speaker-attribution and LoRA evaluation research path.",
+    ],
     decisions: [
       { decision: "Keep manuscript processing and generation local-first.", rationale: "Books, edits, voices and generated media remain in a self-hosted storage boundary.", rejectedAlternative: "Making a hosted model or cloud storage service mandatory." },
       { decision: "Separate the shipping studio from model-attribution experiments.", rationale: "The runnable product can stay reliable while attribution datasets, adapters and evaluations evolve independently.", rejectedAlternative: "Wiring an unvalidated model directly into the production annotation path." },
     ],
-    reliability: ["Structured JSON Schemas validate attribution examples, tool-call outputs and annotation exports.", "Frontend and backend have independent CI checks; a mock TTS path supports deterministic smoke tests.", "The public studio currently does not wire a separate model-based annotation provider; attribution remains a separate research workflow."],
+    reliability: [
+      "Frontend and backend have independent CI checks; a mock TTS engine supports deterministic smoke tests.",
+      "Generation snapshots the current book edits and TTS settings so exported scripts can reproduce the configured job.",
+      "The public studio does not require a separate model-based annotation provider; speaker-attribution research remains isolated from the shipping workflow.",
+    ],
     outcomes: [],
-    currentStatus: "Active self-hosted studio with document import, local TTS, chapter/subtitle export and CI. Speaker-attribution training and evaluation are maintained as a separate experimental track.",
-    technologyGroups: [{ label: "Product", items: ["React", "TypeScript", "FastAPI", "Docker"] }, { label: "Media", items: ["Kokoro", "Chatterbox", "ffmpeg", "M4B", "VTT", "SRT"] }, { label: "Applied AI", items: ["FunctionGemma", "LoRA", "MLX-LM", "Unsloth", "JSON Schema"] }],
+    currentStatus: "Active self-hosted studio with document import, editable chapters, Kokoro/Chatterbox/Chatterbox Turbo, custom styles and character casts, background generation with listen-while-creating, subtitles and M4B export. Speaker-attribution model training and evaluation remain a separate experimental track.",
+    technologyGroups: [
+      { label: "Product", items: ["React", "TypeScript", "FastAPI", "Docker"] },
+      { label: "Media", items: ["Kokoro", "Chatterbox", "Chatterbox Turbo", "ffmpeg", "M4B", "VTT", "SRT"] },
+      { label: "Applied AI", items: ["LoRA", "MLX-LM", "Unsloth", "JSON Schema"] },
+    ],
     media: [],
     proofLinks: [
       { id: "whispbook-github", label: "Whispbook source", url: "https://github.com/chakib-belgaid/whispbook", kind: "repository" },
       { id: "whispbook-lora", label: "Speaker LoRA run", url: "https://huggingface.co/chakibmed/whispbook-qwen3-4b-speaker-lora-speaker_lora_v1_easy_evidence_only_cleaned", kind: "model" },
     ],
-    metadata: { title: "Whispbook case study | Chakib Belgaid", description: "A local-first audiobook studio and structured speaker-attribution workflow spanning React, FastAPI, local TTS and LoRA evaluation." },
+    metadata: { title: "Whispbook case study | Chakib Belgaid", description: "A self-hosted React/FastAPI audiobook studio with local TTS, Chatterbox Turbo character casts, streaming generation, subtitles and M4B export." },
   },
   wattch: {
     slug: "wattch",
@@ -244,66 +259,90 @@ const enProjects: Record<ProjectSlug, ProjectCaseStudy> = {
     sectionOrder: projectSectionOrder,
     name: "Wattch",
     eyebrow: "Protocol-first energy measurement",
-    summary: "A Rust daemon and CLI boundary for local energy and system-telemetry capture, designed around explicit evidence classes, deterministic validation and replayable traces.",
-    problem: "Hardware energy counters can require elevated access, while developers and benchmark tools need a safe, reproducible, unprivileged workflow that does not overstate noisy measurements.",
-    role: "Chakib designed the daemon/client boundary, protocol and validation model, built the RAPL prototype and evolved it into a backend-independent trace-first foundation with deterministic test scenarios.",
+    summary: "A Rust RAPL daemon and CLI for local energy measurement, with length-prefixed protobuf over Unix sockets and a deterministic fake backend for repeatable validation.",
+    problem: "Hardware energy counters can require elevated access, while developers and benchmark tools need a safe, reproducible, unprivileged workflow that does not overstate what machine-level RAPL measurements can prove.",
+    role: "Chakib designed and implemented the Rust daemon/CLI boundary, shared protocol crates, RAPL source discovery, command-wrapper measurement path and deterministic test backend.",
     architecture: {
-      overview: "A privileged acquisition daemon reads raw counters and serves a strict local socket protocol. Unprivileged CLI and Python clients capture source descriptors and sample batches into replayable run artifacts; interpretation stays offline.",
-      flow: ["Linux RAPL powercap or deterministic source", "Rust acquisition daemon", "Framed local Unix socket protocol", "CLI / Python client", "Immutable raw trace artifact", "Offline inspect and validation"],
+      overview: "The privileged rapl-wattchd process discovers Linux RAPL powercap sources and samples counters. The unprivileged wattch CLI talks to it through a Unix-domain socket using length-prefixed protobuf messages, then lists sources, streams samples or measures the energy observed while a child command runs. A deterministic in-memory source exercises the same protocol without root or hardware counters.",
+      flow: ["Linux RAPL powercap or deterministic fake source", "rapl-wattchd Rust daemon", "Length-prefixed protobuf over Unix socket", "wattch CLI", "sources / stream / run workflows", "Table or CSV output"],
     },
-    responsibilities: ["Implemented the Rust daemon, CLI and shared protocol/domain crates.", "Defined protobuf framing in the v0 prototype and a strict versioned frame envelope in Wattch Core.", "Added deterministic scenarios and golden validation before hardware-specific claims.", "Documented privilege, peer-authentication, counter semantics and failure behavior."],
+    responsibilities: [
+      "Implemented the Rust daemon, CLI and shared protocol/domain crates.",
+      "Defined the protobuf framing and validation boundary, including a 1 MiB maximum message size.",
+      "Added deterministic fake-source tests and an end-to-end smoke script that exercise the real daemon/CLI protocol path.",
+      "Built Linux release packaging for Debian/Ubuntu and RPM-based distributions.",
+    ],
     decisions: [
-      { decision: "Separate privileged acquisition from unprivileged clients.", rationale: "RAPL access can require elevation; the Unix socket becomes a narrow, auditable boundary.", rejectedAlternative: "Letting every Python or CLI process read protected counters directly." },
-      { decision: "Keep the daemon deliberately interpretation-free.", rationale: "Raw evidence remains replayable while baselines, aggregation and benchmark claims can evolve offline.", rejectedAlternative: "Embedding joules-per-token, scoring or report generation in the hot acquisition path." },
+      { decision: "Separate privileged acquisition from unprivileged clients.", rationale: "RAPL access can require elevation; the Unix socket becomes a narrow, auditable boundary while the CLI can run without root once socket ownership is handed off safely.", rejectedAlternative: "Letting every client process read protected counters directly." },
+      { decision: "Keep attribution claims conservative.", rationale: "The command wrapper reports RAPL energy observed while the child runs, without claiming process-exclusive or function-level attribution.", rejectedAlternative: "Presenting machine-level counter deltas as exact per-process energy." },
     ],
-    reliability: ["Descriptor and sample invariants reject unknown sources and non-monotonic sequences.", "A deterministic daemon validates protocol behavior without pretending synthetic values are hardware evidence.", "The production-oriented daemon documents socket permissions, Linux peer credentials, stale-socket recovery and partial-source failures."],
+    reliability: [
+      "Every protobuf message is length-prefixed and capped at 1 MiB before decoding.",
+      "The deterministic fake backend validates protocol and CLI behavior without presenting synthetic samples as hardware evidence.",
+      "The quality gate runs cargo metadata, formatting, clippy with warnings denied, tests and a locked workspace build.",
+    ],
     outcomes: [],
-    currentStatus: "The public v0 Rust prototype proves RAPL, protobuf framing and Unix-socket collection. A local protocol-first rewrite adds replayable trace artifacts and deterministic validation; that rewrite was not publicly reachable during the audit.",
-    technologyGroups: [{ label: "Systems", items: ["Rust", "Linux", "RAPL", "Unix sockets"] }, { label: "Protocol", items: ["Protobuf", "Binary frames", "Typed descriptors"] }, { label: "Validation", items: ["Deterministic daemon", "Golden tests", "Replayable traces"] }],
-    media: [
-      { id: "wattch-deterministic-trace", kind: "terminal", src: "/assets/projects/wattch/deterministic-trace.svg", alt: "Terminal transcript from Wattch's deterministic test daemon", caption: "Real dry-run output from the checked-in deterministic laptop scenario; it is protocol evidence, not a hardware-energy claim.", evidenceIds: ["repo:wattch-core"] },
+    currentStatus: "Public v0.1-alpha exploratory prototype. It supports Linux RAPL source discovery, protobuf-framed Unix-socket communication, sources/stream/run CLI workflows, deterministic fake-backend tests and Linux package builds. It intentionally does not claim process-level or function-level energy attribution.",
+    technologyGroups: [
+      { label: "Systems", items: ["Rust", "Linux", "RAPL", "Unix sockets"] },
+      { label: "Protocol", items: ["Protobuf", "Length-prefixed frames", "Typed validation"] },
+      { label: "Validation", items: ["Deterministic fake backend", "Smoke tests", "cargo fmt / clippy / test / build"] },
     ],
-    proofLinks: [{ id: "wattch-github", label: "Wattch v0 source", url: "https://github.com/chakib-belgaid/Wattch", kind: "repository" }],
-    metadata: { title: "Wattch case study | Chakib Belgaid", description: "A protocol-first Rust energy-measurement stack with RAPL acquisition, Unix sockets, deterministic validation and replayable traces." },
+    media: [
+      { id: "wattch-deterministic-trace", kind: "terminal", src: "/assets/projects/wattch/deterministic-trace.svg", alt: "Terminal transcript from Wattch's deterministic test daemon", caption: "Deterministic protocol smoke output used to validate the local daemon/CLI path; it is test evidence, not a hardware-energy claim.", evidenceIds: ["repo:wattch-core"] },
+    ],
+    proofLinks: [{ id: "wattch-github", label: "Wattch source", url: "https://github.com/chakib-belgaid/Wattch", kind: "repository" }],
+    metadata: { title: "Wattch case study | Chakib Belgaid", description: "A Rust RAPL daemon and CLI with protobuf-framed Unix sockets, deterministic validation and conservative energy-measurement semantics." },
   },
 };
 
 const frenchProjectCopy: Record<ProjectSlug, Omit<ProjectCaseStudy, "slug" | "locale" | "sectionOrder" | "technologyGroups" | "media" | "proofLinks"> & { technologyGroups: TechnologyGroup[] }> = {
   whispbook: {
     name: "Whispbook",
-    eyebrow: "Workflows IA d'audiobook local-first",
-    summary: "Un studio d'audiobook auto-hébergé en React et FastAPI, associé à des outils de recherche pour l'attribution de locuteurs sous schéma et l'évaluation locale d'adapters LoRA.",
-    problem: "Transformer un manuscrit en audio éditable et chapitré demande nettoyage, contrôle des voix, génération longue, sous-titres et attribution des personnages, sans envoyer le corpus à un service opaque.",
-    role: "Chakib porte le workflow produit et l'implémentation backend/frontend, ainsi qu'une voie de recherche séparée pour le contexte contrôlé, les sorties structurées, les adapters LoRA locaux et les rapports d'évaluation.",
-    architecture: { overview: "Le produit transforme les documents locaux en chapitres éditables, fige l'état du livre et les réglages TTS, puis génère audio, sous-titres et M4B. La recherche prépare séparément candidats et indices contextuels pour l'attribution structurée.", flow: ["Document local à texte sélectionnable", "Espace chapitres et paragraphes", "Workflow planificateur/coordinateur à contexte borné", "Attribution du locuteur / association de voix", "Jobs TTS locaux", "Audio par chapitre + VTT/SRT + M4B"] },
-    responsibilities: ["Création de l'éditeur React et des API FastAPI de stockage et de jobs.", "Intégration des moteurs TTS locaux/ouverts, de la préécoute, de la génération et des sous-titres.", "Définition de schémas structurés d'attribution/export et du contexte fondé sur des candidats.", "Création des ressources LoRA MLX-LM/Unsloth et des rapports d'évaluation par checkpoint."],
+    eyebrow: "Production d'audiobooks local-first",
+    summary: "Un studio d'audiobook auto-hébergé en React et FastAPI qui transforme des documents locaux en audiobooks éditables et multi-voix avec TTS local, casts de personnages, sous-titres et export M4B.",
+    problem: "Transformer un manuscrit en audiobook abouti demande nettoyage, contrôle des voix, génération longue, sous-titres et packaging tout en gardant le corpus et les médias sous le contrôle de l'utilisateur.",
+    role: "Chakib porte le workflow produit et l'implémentation backend/frontend : import de documents, édition, TTS local, contrôle des voix de personnages, jobs de génération et packaging audiobook ; l'attribution automatique des locuteurs reste une piste de recherche séparée.",
+    architecture: { overview: "Whispbook convertit les documents locaux à texte sélectionnable en chapitres et paragraphes éditables. L'utilisateur choisit chapitres, voix et réglages, préécoute un paragraphe, attribue des voix Chatterbox Turbo aux personnages et des indications paralinguistiques, puis lance la synthèse en arrière-plan tout en écoutant les paragraphes terminés. Le backend produit audio par chapitre, sous-titres VTT/SRT et audiobook M4B final.", flow: ["Document local à texte sélectionnable", "Chapitres et paragraphes éditables", "Styles, voix et personnages", "Préécoute d'un paragraphe", "Génération TTS locale en arrière-plan", "Audio + VTT/SRT + M4B"] },
+    responsibilities: ["Création de l'éditeur React et des API FastAPI de stockage et de jobs.", "Intégration de Kokoro, Chatterbox et Chatterbox Turbo pour la préécoute et la génération complète.", "Ajout des styles personnalisés, casts Turbo, plages de voix surlignées et balises paralinguistiques inline.", "Création du packaging audio par chapitre, VTT/SRT, M4B et des scripts Python exportables.", "Maintien séparé du workflow de recherche d'attribution de locuteurs et d'évaluation LoRA."],
     decisions: [{ decision: "Garder le traitement et la génération local-first.", rationale: "Livres, modifications, voix et médias restent dans une frontière auto-hébergée.", rejectedAlternative: "Rendre obligatoire un modèle hébergé ou un stockage cloud." }, { decision: "Séparer le studio des expériences d'attribution.", rationale: "Le produit exécutable reste fiable pendant que datasets, adapters et évaluations évoluent.", rejectedAlternative: "Brancher directement un modèle non validé dans le chemin d'annotation produit." }],
-    reliability: ["Des JSON Schemas valident exemples d'attribution, appels d'outils et exports.", "Frontend et backend ont des contrôles CI séparés ; un TTS mock rend les smoke tests déterministes.", "Le studio public ne branche pas encore de fournisseur d'annotation par modèle ; l'attribution reste un workflow de recherche séparé."],
+    reliability: ["Frontend et backend ont des contrôles CI séparés ; un TTS mock rend les smoke tests déterministes.", "La génération fige l'état courant du livre et des réglages TTS afin que les scripts exportés puissent reproduire le job configuré.", "Le studio public n'impose pas de fournisseur d'annotation par modèle ; la recherche d'attribution reste isolée du workflow livré."],
     outcomes: [],
-    currentStatus: "Studio auto-hébergé actif avec import, TTS local, chapitres/sous-titres et CI. L'entraînement et l'évaluation d'attribution restent une piste expérimentale séparée.",
-    technologyGroups: [{ label: "Produit", items: ["React", "TypeScript", "FastAPI", "Docker"] }, { label: "Média", items: ["Kokoro", "Chatterbox", "ffmpeg", "M4B", "VTT", "SRT"] }, { label: "IA appliquée", items: ["FunctionGemma", "LoRA", "MLX-LM", "Unsloth", "JSON Schema"] }],
-    metadata: { title: "Étude de cas Whispbook | Chakib Belgaid", description: "Un studio d'audiobook local-first et un workflow d'attribution structurée avec React, FastAPI, TTS local et évaluation LoRA." },
+    currentStatus: "Studio auto-hébergé actif avec import, chapitres éditables, Kokoro/Chatterbox/Chatterbox Turbo, styles et casts de personnages, génération en arrière-plan avec écoute progressive, sous-titres et export M4B. L'entraînement et l'évaluation des modèles d'attribution restent expérimentaux et séparés.",
+    technologyGroups: [{ label: "Produit", items: ["React", "TypeScript", "FastAPI", "Docker"] }, { label: "Média", items: ["Kokoro", "Chatterbox", "Chatterbox Turbo", "ffmpeg", "M4B", "VTT", "SRT"] }, { label: "IA appliquée", items: ["LoRA", "MLX-LM", "Unsloth", "JSON Schema"] }],
+    metadata: { title: "Étude de cas Whispbook | Chakib Belgaid", description: "Un studio d'audiobook React/FastAPI auto-hébergé avec TTS local, casts Chatterbox Turbo, génération progressive, sous-titres et export M4B." },
   },
   wattch: {
     name: "Wattch",
     eyebrow: "Mesure énergétique protocol-first",
-    summary: "Une frontière daemon/CLI en Rust pour la capture locale d'énergie et de télémétrie, fondée sur des classes de preuve explicites, la validation déterministe et des traces rejouables.",
-    problem: "Les compteurs énergétiques matériels peuvent exiger des privilèges, tandis que développeurs et outils de benchmark ont besoin d'un workflow sûr, reproductible et non privilégié qui ne surinterprète pas le bruit.",
-    role: "Chakib a conçu la frontière daemon/client, le protocole et le modèle de validation, réalisé le prototype RAPL puis l'a fait évoluer vers une base indépendante du backend, centrée sur les traces et les scénarios déterministes.",
-    architecture: { overview: "Un daemon d'acquisition privilégié lit les compteurs bruts et sert un protocole strict sur socket local. Les clients CLI et Python non privilégiés capturent des descripteurs et lots d'échantillons dans des artefacts rejouables ; l'interprétation reste hors ligne.", flow: ["RAPL powercap Linux ou source déterministe", "Daemon d'acquisition Rust", "Protocole local Unix socket encadré", "Client CLI / Python", "Artefact de trace brute immuable", "Inspection et validation hors ligne"] },
-    responsibilities: ["Implémentation du daemon, de la CLI et des crates partagées en Rust.", "Définition du framing protobuf du prototype v0 et d'une enveloppe versionnée stricte dans Wattch Core.", "Ajout de scénarios déterministes et de validations golden avant les affirmations matérielles.", "Documentation des privilèges, de l'authentification des pairs, des compteurs et des échecs."],
-    decisions: [{ decision: "Séparer acquisition privilégiée et clients non privilégiés.", rationale: "RAPL peut demander une élévation ; la socket Unix devient une frontière étroite et auditable.", rejectedAlternative: "Laisser chaque processus Python ou CLI lire directement les compteurs protégés." }, { decision: "Garder le daemon sans interprétation.", rationale: "Les preuves brutes restent rejouables et les baselines, agrégations et conclusions évoluent hors ligne.", rejectedAlternative: "Calculer joules/token, scores ou rapports dans le chemin d'acquisition critique." }],
-    reliability: ["Les invariants rejettent sources inconnues et séquences non monotones.", "Un daemon déterministe valide le protocole sans présenter les valeurs synthétiques comme mesures matérielles.", "Le daemon orienté production documente permissions de socket, identité Linux du pair, récupération des sockets obsolètes et pannes partielles."],
+    summary: "Un daemon RAPL et une CLI en Rust pour la mesure énergétique locale, avec protobuf préfixé par longueur sur sockets Unix et un backend déterministe pour des validations reproductibles.",
+    problem: "Les compteurs énergétiques matériels peuvent exiger des privilèges, tandis que développeurs et outils de benchmark ont besoin d'un workflow sûr, reproductible et non privilégié qui ne surinterprète pas ce que les mesures RAPL de la machine peuvent prouver.",
+    role: "Chakib a conçu et implémenté la frontière daemon/CLI en Rust, les crates de protocole partagées, la découverte des sources RAPL, le wrapper de commandes et le backend déterministe de test.",
+    architecture: { overview: "Le processus privilégié rapl-wattchd découvre les sources RAPL powercap Linux et échantillonne les compteurs. La CLI wattch non privilégiée communique via une socket Unix avec des messages protobuf préfixés par leur longueur, puis liste les sources, diffuse les échantillons ou mesure l'énergie observée pendant l'exécution d'une commande enfant. Une source déterministe en mémoire exerce le même protocole sans root ni compteurs matériels.", flow: ["RAPL powercap Linux ou source déterministe", "Daemon Rust rapl-wattchd", "Protobuf préfixé par longueur sur socket Unix", "CLI wattch", "Workflows sources / stream / run", "Sortie table ou CSV"] },
+    responsibilities: ["Implémentation du daemon, de la CLI et des crates partagées en Rust.", "Définition du framing protobuf et de la validation, avec une taille maximale de message de 1 Mio.", "Ajout d'une source déterministe et d'un smoke test end-to-end qui exercent le vrai chemin protocole daemon/CLI.", "Création des packages Linux pour Debian/Ubuntu et les distributions basées sur RPM."],
+    decisions: [{ decision: "Séparer acquisition privilégiée et clients non privilégiés.", rationale: "RAPL peut demander une élévation ; la socket Unix devient une frontière étroite et auditable tandis que la CLI peut fonctionner sans root après transfert sécurisé de la socket.", rejectedAlternative: "Laisser chaque client lire directement les compteurs protégés." }, { decision: "Rester conservateur sur l'attribution.", rationale: "Le wrapper rapporte l'énergie RAPL observée pendant l'exécution de l'enfant sans prétendre à une attribution exclusive par processus ou fonction.", rejectedAlternative: "Présenter les deltas des compteurs machine comme une énergie exacte par processus." }],
+    reliability: ["Chaque message protobuf est préfixé par sa longueur et limité à 1 Mio avant décodage.", "Le backend déterministe valide protocole et CLI sans présenter les valeurs synthétiques comme mesures matérielles.", "Le quality gate exécute cargo metadata, formatage, clippy avec warnings interdits, tests et build verrouillé du workspace."],
     outcomes: [],
-    currentStatus: "Le prototype Rust v0 public prouve RAPL, le framing protobuf et la collecte Unix socket. Une réécriture protocol-first locale ajoute traces rejouables et validation déterministe ; elle n'était pas publiquement accessible pendant l'audit.",
-    technologyGroups: [{ label: "Systèmes", items: ["Rust", "Linux", "RAPL", "Unix sockets"] }, { label: "Protocole", items: ["Protobuf", "Frames binaires", "Descripteurs typés"] }, { label: "Validation", items: ["Daemon déterministe", "Golden tests", "Traces rejouables"] }],
-    metadata: { title: "Étude de cas Wattch | Chakib Belgaid", description: "Une pile Rust protocol-first pour la mesure énergétique : RAPL, sockets Unix, validation déterministe et traces rejouables." },
+    currentStatus: "Prototype exploratoire public v0.1-alpha. Il prend en charge la découverte RAPL Linux, la communication protobuf sur socket Unix, les workflows CLI sources/stream/run, les tests avec backend déterministe et les packages Linux. Il ne revendique volontairement aucune attribution énergétique au niveau processus ou fonction.",
+    technologyGroups: [{ label: "Systèmes", items: ["Rust", "Linux", "RAPL", "Unix sockets"] }, { label: "Protocole", items: ["Protobuf", "Frames préfixées par longueur", "Validation typée"] }, { label: "Validation", items: ["Backend déterministe", "Smoke tests", "cargo fmt / clippy / test / build"] }],
+    metadata: { title: "Étude de cas Wattch | Chakib Belgaid", description: "Un daemon RAPL et une CLI Rust avec protobuf sur sockets Unix, validation déterministe et sémantique de mesure énergétique conservatrice." },
   },
 };
 
 function buildFrenchProject(slug: ProjectSlug): ProjectCaseStudy {
   const english = enProjects[slug];
-  return { ...english, ...frenchProjectCopy[slug], locale: "fr", architecture: frenchProjectCopy[slug].architecture, sectionOrder: projectSectionOrder, media: english.media.map((item) => ({ ...item, alt: item.id === "wattch-deterministic-trace" ? "Transcription du daemon de test déterministe Wattch" : item.alt, caption: item.id === "wattch-deterministic-trace" ? "Sortie réelle du scénario déterministe versionné ; preuve de protocole, pas mesure énergétique matérielle." : item.caption })) };
+  return {
+    ...english,
+    ...frenchProjectCopy[slug],
+    locale: "fr",
+    architecture: frenchProjectCopy[slug].architecture,
+    sectionOrder: projectSectionOrder,
+    media: english.media.map((item) => ({
+      ...item,
+      alt: item.id === "wattch-deterministic-trace" ? "Transcription du daemon de test déterministe Wattch" : item.alt,
+      caption: item.id === "wattch-deterministic-trace" ? "Sortie de test déterministe utilisée pour valider le chemin daemon/CLI ; preuve de protocole, pas mesure énergétique matérielle." : item.caption,
+    })),
+  };
 }
 
 const frProjects: Record<ProjectSlug, ProjectCaseStudy> = {
@@ -371,14 +410,8 @@ export const siteContent = {
 export { portfolioContacts } from "./contacts";
 
 export const resumeLinks = {
-  en: {
-    html: "/resume/chakib-belgaid-product-engineer-en.html",
-    pdf: "/resume/chakib-belgaid-product-engineer-en.pdf",
-  },
-  fr: {
-    html: "/resume/chakib-belgaid-product-engineer-fr.html",
-    pdf: "/resume/chakib-belgaid-product-engineer-fr.pdf",
-  },
+  en: { html: "/resume/chakib-belgaid-product-engineer-en.html", pdf: "/resume/chakib-belgaid-product-engineer-en.pdf" },
+  fr: { html: "/resume/chakib-belgaid-product-engineer-fr.html", pdf: "/resume/chakib-belgaid-product-engineer-fr.pdf" },
 } as const satisfies Record<Locale, { html: string; pdf: string }>;
 
 export function getProject(locale: Locale, slug: ProjectSlug): ProjectCaseStudy {
