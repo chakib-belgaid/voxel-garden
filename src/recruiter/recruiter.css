@@ -360,6 +360,10 @@ body:has(.portfolio-site) {
   background: var(--portfolio-surface);
 }
 
+.portfolio-media--portrait:not(.portfolio-media--featured) {
+  aspect-ratio: 9 / 16;
+}
+
 .portfolio-media::before,
 .portfolio-media::after {
   position: absolute;
@@ -389,6 +393,12 @@ body:has(.portfolio-site) {
   height: 100%;
   display: block;
   object-fit: cover;
+}
+
+.portfolio-media--portrait img {
+  object-fit: contain;
+  object-position: top center;
+  background: #07151c;
 }
 
 .portfolio-media__empty {
@@ -758,6 +768,10 @@ body:has(.portfolio-site) {
   margin-top: 34px;
 }
 
+.portfolio-media-grid > :only-child {
+  grid-column: 1 / -1;
+}
+
 .portfolio-case-tech {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -980,6 +994,10 @@ body:has(.portfolio-site) {
   .portfolio-case-tech,
   .portfolio-outcomes {
     grid-template-columns: 1fr;
+  }
+
+  .portfolio-media-grid .portfolio-media--portrait {
+    aspect-ratio: 3 / 4;
   }
 }
 

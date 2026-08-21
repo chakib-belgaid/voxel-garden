@@ -43,7 +43,8 @@ describe("recruiter portfolio UI", () => {
   it("keeps the language switch on the matching French case study", () => {
     render(createElement(RecruiterRouter, { route: "/fr/work/whispbook" }));
 
-    expect(screen.getByRole("heading", { level: 1, name: "Whispbook" })).toBeTruthy();
+    expect(screen.getByRole("heading", { level: 1, name: "Whisperbook" })).toBeTruthy();
+    expect(screen.getByAltText(/lecture Android Whisperbook/i)).toBeTruthy();
     expect(screen.getByRole("link", { name: "English" }).getAttribute("href")).toBe("/work/whispbook");
     expect(screen.getByRole("link", { name: "Projets" }).getAttribute("href")).toBe("/fr/live#work");
     expect(document.querySelector<HTMLAnchorElement>('a[download][href$="-fr.pdf"]')).toBeTruthy();
@@ -62,7 +63,9 @@ describe("recruiter portfolio UI", () => {
       "outcome",
       "proof"
     ]);
-    expect(screen.getByText("Linux RAPL powercap or deterministic source")).toBeTruthy();
+    expect(screen.getByText("Linux RAPL powercap or synthetic source")).toBeTruthy();
+    expect(screen.getByRole("heading", { level: 1, name: "Wattch Core" })).toBeTruthy();
+    expect(screen.getByAltText(/deterministic test daemon/i)).toBeTruthy();
     expect(document.querySelector('a[href="#work"]')).toBeNull();
     expect(document.querySelector('a[href="/live#work"]')).toBeTruthy();
   });

@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">Étude de cas Whispbook</title>
-  <desc id="desc">Workflows IA locaux, sorties structurées et évaluation.</desc>
+  <title id="title">Étude de cas Android Whisperbook</title>
+  <desc id="desc">Application Android de livre audio hors ligne avec import EPUB/PDF local et narration embarquée.</desc>
   <rect width="1200" height="630" fill="#031014"/>
   <path d="M0 96H1200M0 534H1200M82 0V630M1118 0V630" stroke="#12373c" stroke-width="2"/>
   <rect x="82" y="64" width="126" height="8" fill="#b9f227"/>
   <text x="82" y="142" fill="#8eb3b7" font-family="'IBM Plex Mono',monospace" font-size="25" letter-spacing="3">PROJET SÉLECTIONNÉ / ÉTUDE DE CAS</text>
-  <text x="82" y="306" fill="#f2f8f5" font-family="Arial,sans-serif" font-size="112" font-weight="700">Whispbook</text>
-  <text x="82" y="404" fill="#d8ae50" font-family="'IBM Plex Mono',monospace" font-size="23">WORKFLOWS IA · MODÈLES LOCAUX · SORTIES STRUCTURÉES · ÉVALUATION</text>
+  <text x="82" y="306" fill="#f2f8f5" font-family="Arial,sans-serif" font-size="112" font-weight="700">Whisperbook</text>
+  <text x="82" y="404" fill="#d8ae50" font-family="'IBM Plex Mono',monospace" font-size="23">ANDROID · KOTLIN / COMPOSE · SUPERTONIC 3 · HORS LIGNE</text>
   <text x="82" y="580" fill="#8eb3b7" font-family="'IBM Plex Mono',monospace" font-size="24">chakib-belgaid.github.io/fr/work/whispbook</text>
 </svg>

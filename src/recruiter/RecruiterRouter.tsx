@@ -206,9 +206,19 @@ function ImpactRail({ locale, metrics }: { readonly locale: Locale; readonly met
   );
 }
 
-function MediaFrame({ media, priority = false }: { readonly media: ProjectMedia; readonly priority?: boolean }) {
+function MediaFrame({ media, priority = false, featured = false }: {
+  readonly media: ProjectMedia;
+  readonly priority?: boolean;
+  readonly featured?: boolean;
+}) {
+  const classNames = [
+    "portfolio-media",
+    media.orientation === "portrait" ? "portfolio-media--portrait" : "portfolio-media--landscape",
+    featured ? "portfolio-media--featured" : "",
+  ].filter(Boolean).join(" ");
+
   return (
-    <figure className="portfolio-media">
+    <figure className={classNames}>
       <img src={media.src} alt={media.alt} loading={priority ? "eager" : "lazy"} decoding="async" />
       <figcaption>{media.caption}</figcaption>
     </figure>
@@ -244,7 +254,7 @@ function ProjectRow({ locale, project, index }: {
           <dd>{technology}</dd>
         </div>
       </dl>
-      {media ? <MediaFrame media={media} /> : null}
+      {media ? <MediaFrame media={media} featured /> : null}
       <a className="portfolio-text-link portfolio-work-row__action" href={getProjectPath(locale, project.slug)}>
         {ui[locale].readCase} <Arrow />
       </a>
@@ -444,7 +454,7 @@ function ProjectPage({ locale, slug }: { readonly locale: Locale; readonly slug:
               </div>
             </dl>
           </section>
-          {project.media[0] ? <MediaFrame media={project.media[0]} priority /> : null}
+          {project.media[0] ? <MediaFrame media={project.media[0]} priority featured /> : null}
 
           <div className="portfolio-case-layout">
             <aside className="portfolio-case-layout__aside" aria-label={locale === "en" ? "Case study sections" : "Sections de l’étude de cas"}>
