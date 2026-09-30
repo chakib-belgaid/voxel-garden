@@ -117,7 +117,7 @@ function parseRoute(route: string):
 
   if (path === "/live" || path === "/fr/live") return { kind: "home", locale };
 
-  const match = path.match(/^\/(?:fr\/)?work\/(whispbook|wattch)$/);
+  const match = path.match(/^\/(?:fr\/)?work\/(mcq-scan|whispbook|wattch)$/);
   if (match) return { kind: "project", locale, slug: match[1] as ProjectSlug };
 
   return { kind: "not-found", locale };
@@ -253,10 +253,6 @@ function ProjectRow({ locale, project, index }: {
         </a>
       </div>
       <dl className="portfolio-work-row__meta">
-        <div>
-          <dt>{locale === "en" ? "Role" : "Rôle"}</dt>
-          <dd>{project.role}</dd>
-        </div>
         <div>
           <dt>{locale === "en" ? "Technology" : "Technologies"}</dt>
           <dd>{technology}</dd>
@@ -532,6 +528,7 @@ function ProjectPage({ locale, slug }: { readonly locale: Locale; readonly slug:
               </CaseSection>
 
               <CaseSection id="proof" number="07" title={labels.proof}>
+                {project.evidenceIds ? <EvidenceNote locale={locale} ids={project.evidenceIds} /> : null}
                 {project.media.length > 1 ? (
                   <div className="portfolio-media-grid">
                     {project.media.slice(1).map((media) => <MediaFrame media={media} key={media.id} />)}

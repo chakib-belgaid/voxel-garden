@@ -1,7 +1,7 @@
 export const locales = ["en", "fr"] as const;
 export type Locale = (typeof locales)[number];
 
-export const projectSlugs = ["whispbook", "wattch"] as const;
+export const projectSlugs = ["mcq-scan", "whispbook", "wattch"] as const;
 export type ProjectSlug = (typeof projectSlugs)[number];
 
 export const projectSectionOrder = [
@@ -46,6 +46,9 @@ export const evidenceReferences = {
     sourceUrl: "https://mcq-scan.com/",
     note: "Evidence for AI-platform architecture and delivery ownership.",
   },
+  "cvdb:mcq-gcp-deployment": { label: "MCQ GCP deployment", source: "CVDB / mcq-gcp-deployment", note: "Cloud Run, Secret Manager, Artifact Registry, Docker and GitHub Actions delivery." },
+  "cvdb:structured-output-llm-pipelines": { label: "Structured-output LLM pipelines", source: "CVDB / structured-output-llm-pipelines", note: "Constrained decoding and schema-valid output interfaces; public evaluation artifacts are unavailable." },
+  "user:client-deployment": { label: "Client-infrastructure deployment", source: "Chakib’s account, September 2026", note: "Compiled runnable software delivered without handing over source; no IP-protection or commercial-outcome claim." },
   "cvdb:phd-green-coding": {
     label: "Ph.D. in green coding and energy-aware software",
     source: "CVDB / phd-green-coding",
@@ -149,6 +152,7 @@ export interface ProjectCaseStudy {
   name: string;
   eyebrow: string;
   summary: string;
+  evidenceIds?: EvidenceId[];
   problem: string;
   role: string;
   architecture: { overview: string; flow: string[] };
@@ -217,6 +221,96 @@ export interface PortfolioSiteContent {
 }
 
 const enProjects: Record<ProjectSlug, ProjectCaseStudy> = {
+  "mcq-scan": {
+  "slug": "mcq-scan",
+  "locale": "en",
+  "name": "MCQ Scan",
+  "eyebrow": "Production AI · professional experience",
+  "summary": "Led a no-code multi-agent platform for client workflows, from API architecture and frontend integration to GCP deployment.",
+  "evidenceIds": [
+    "cvdb:mcq-agentic-ai-platform",
+    "cvdb:mcq-gcp-deployment",
+    "cvdb:structured-output-llm-pipelines",
+    "cvdb:mcq-local-model-optimization",
+    "user:client-deployment"
+  ],
+  "problem": "Advertising agencies needed an agentic ad/ops automation system. My work connected no-code workflows, LLM orchestration, product interfaces and deployable infrastructure.",
+  "role": "AI Research Engineer / Lead AI Engineer, 2024–present. Led architecture, implementation and deployment, coordinating a two-person engineering team.",
+  "architecture": {
+    "overview": "The platform combines no-code client workflows, API and frontend integration, multi-agent orchestration and structured-output LLM pipelines. I architected and deployed the platform on GCP using Cloud Run, Docker, GitHub Actions, Artifact Registry and Secret Manager. This is a high-level account; client topology and implementation are private.",
+    "flow": [
+      "No-code client workflows",
+      "API and frontend integration",
+      "Multi-agent orchestration",
+      "Structured-output LLM pipelines",
+      "GCP deployment"
+    ]
+  },
+  "responsibilities": [
+    "Led development from API architecture and frontend integration through deployment.",
+    "Built CI/CD deployment paths with Cloud Run, Secret Manager, Artifact Registry, Docker and GitHub Actions.",
+    "Engineered constrained decoding and structured-output pipelines.",
+    "Optimized inference and redesigned prompts/tool flows; fine-tuned a 7B-class local model.",
+    "For a client-infrastructure deployment, compiled the code into runnable software so delivery did not require handing over source code."
+  ],
+  "decisions": [
+    {
+      "decision": "Deliver runnable software for client infrastructure.",
+      "rationale": "The client wanted deployment in its own infrastructure; leadership was concerned about distributing source. Compilation addressed the delivery format. It does not guarantee IP protection or prevent reverse engineering.",
+      "rejectedAlternative": "Distributing the source code as the deployment package."
+    }
+  ],
+  "reliability": [
+    "Constrained decoding and structured-output pipelines enforce schema-valid interfaces. Schema validity does not establish semantic correctness.",
+    "CI/CD and GCP Secret Manager support deployment and secret handling.",
+    "Client source, screenshots, evaluation datasets and deployment manifests are not included in this public account."
+  ],
+  "outcomes": [
+    {
+      "id": "mcq-latency",
+      "label": "Reported inference latency reduction",
+      "value": "60%",
+      "evidenceIds": [
+        "cvdb:mcq-local-model-optimization"
+      ]
+    }
+  ],
+  "currentStatus": "Professional work documented in my CV evidence database. The reported latency improvement has no public benchmark dataset or baseline methodology attached. This case study summarizes my contribution; it is not a public demo or independent production audit.",
+  "technologyGroups": [
+    {
+      "label": "AI systems",
+      "items": [
+        "Multi-agent orchestration",
+        "Structured outputs",
+        "Local LLMs"
+      ]
+    },
+    {
+      "label": "Deployment",
+      "items": [
+        "GCP Cloud Run",
+        "Docker",
+        "GitHub Actions",
+        "Artifact Registry",
+        "Secret Manager"
+      ]
+    }
+  ],
+  "media": [],
+  "proofLinks": [
+    {
+      "id": "mcq-company",
+      "label": "MCQ Scan company website (company context)",
+      "url": "https://mcq-scan.com/",
+      "kind": "profile"
+    }
+  ],
+  "metadata": {
+    "title": "MCQ Scan production AI case study | Chakib Belgaid",
+    "description": "Professional ownership of a no-code multi-agent platform, structured LLM outputs and GCP deployment."
+  },
+  sectionOrder: projectSectionOrder
+},
   whispbook: {
     slug: "whispbook",
     locale: "en",
@@ -313,7 +407,7 @@ const enProjects: Record<ProjectSlug, ProjectCaseStudy> = {
   },
 };
 
-const frenchProjectCopy: Record<ProjectSlug, Omit<ProjectCaseStudy, "slug" | "locale" | "sectionOrder" | "technologyGroups" | "media" | "proofLinks"> & { technologyGroups: TechnologyGroup[] }> = {
+const frenchProjectCopy: Record<Exclude<ProjectSlug, "mcq-scan">, Omit<ProjectCaseStudy, "slug" | "locale" | "sectionOrder" | "technologyGroups" | "media" | "proofLinks"> & { technologyGroups: TechnologyGroup[] }> = {
   whispbook: {
     name: "Whisperbook",
     eyebrow: "Audiobooks privés sur l'appareil",
@@ -373,7 +467,7 @@ const frenchMediaCopy: Record<string, { alt: string; caption: string }> = {
   },
 };
 
-function buildFrenchProject(slug: ProjectSlug): ProjectCaseStudy {
+function buildFrenchProject(slug: Exclude<ProjectSlug, "mcq-scan">): ProjectCaseStudy {
   const english = enProjects[slug];
   return {
     ...english,
@@ -386,6 +480,96 @@ function buildFrenchProject(slug: ProjectSlug): ProjectCaseStudy {
 }
 
 const frProjects: Record<ProjectSlug, ProjectCaseStudy> = {
+  "mcq-scan": {
+  "slug": "mcq-scan",
+  "locale": "fr",
+  "name": "MCQ Scan",
+  "eyebrow": "IA en production · expérience professionnelle",
+  "summary": "Pilotage d’une plateforme no-code multi-agents pour les workflows clients, de l’architecture API et du frontend au déploiement GCP.",
+  "evidenceIds": [
+    "cvdb:mcq-agentic-ai-platform",
+    "cvdb:mcq-gcp-deployment",
+    "cvdb:structured-output-llm-pipelines",
+    "cvdb:mcq-local-model-optimization",
+    "user:client-deployment"
+  ],
+  "problem": "Les agences publicitaires avaient besoin d’un système d’automatisation agentique ad/ops. Mon travail reliait workflows no-code, orchestration LLM, interfaces produit et infrastructure déployable.",
+  "role": "AI Research Engineer / Lead AI Engineer, 2024–aujourd’hui. Pilotage de l’architecture, du développement et du déploiement, avec coordination d’une équipe technique de deux personnes.",
+  "architecture": {
+    "overview": "La plateforme relie workflows clients no-code, API, frontend, orchestration multi-agents et sorties LLM structurées. J’ai conçu et déployé la plateforme sur GCP avec Cloud Run, Docker, GitHub Actions, Artifact Registry et Secret Manager. Cette description reste générale : topologie client et implémentation sont privées.",
+    "flow": [
+      "Workflows clients no-code",
+      "Intégration API et frontend",
+      "Orchestration multi-agents",
+      "Pipelines LLM à sorties structurées",
+      "Déploiement GCP"
+    ]
+  },
+  "responsibilities": [
+    "Pilotage du développement de l’architecture API et du frontend jusqu’au déploiement.",
+    "Création des chemins CI/CD avec Cloud Run, Secret Manager, Artifact Registry, Docker et GitHub Actions.",
+    "Développement de pipelines à décodage contraint et sorties structurées.",
+    "Optimisation de l’inférence, refonte des prompts et flux d’outils, fine-tuning d’un modèle local de classe 7B.",
+    "Pour un déploiement dans l’infrastructure d’un client, compilation du code en logiciel exécutable afin de livrer sans remettre le code source."
+  ],
+  "decisions": [
+    {
+      "decision": "Livrer un logiciel exécutable dans l’infrastructure client.",
+      "rationale": "Le client souhaitait un déploiement chez lui ; la direction était préoccupée par la distribution du source. La compilation répondait au format de livraison. Elle ne garantit ni protection de la propriété intellectuelle ni impossibilité de rétro-ingénierie.",
+      "rejectedAlternative": "Distribuer le code source comme paquet de déploiement."
+    }
+  ],
+  "reliability": [
+    "Le décodage contraint et les sorties structurées imposent des interfaces conformes au schéma. Cette conformité ne prouve pas la justesse sémantique.",
+    "La CI/CD et GCP Secret Manager prennent en charge déploiement et gestion des secrets.",
+    "Code client, captures, jeux d’évaluation et manifests de déploiement ne sont pas inclus dans cette présentation publique."
+  ],
+  "outcomes": [
+    {
+      "id": "mcq-latency",
+      "label": "Réduction de latence d’inférence rapportée",
+      "value": "60%",
+      "evidenceIds": [
+        "cvdb:mcq-local-model-optimization"
+      ]
+    }
+  ],
+  "currentStatus": "Expérience professionnelle documentée dans ma base de preuves CV. Aucun jeu de benchmark ni protocole de référence public n’accompagne la réduction de latence rapportée. Cette étude décrit ma contribution ; ce n’est ni une démo publique ni un audit indépendant de production.",
+  "technologyGroups": [
+    {
+      "label": "Systèmes IA",
+      "items": [
+        "Orchestration multi-agents",
+        "Sorties structurées",
+        "LLM locaux"
+      ]
+    },
+    {
+      "label": "Déploiement",
+      "items": [
+        "GCP Cloud Run",
+        "Docker",
+        "GitHub Actions",
+        "Artifact Registry",
+        "Secret Manager"
+      ]
+    }
+  ],
+  "media": [],
+  "proofLinks": [
+    {
+      "id": "mcq-company",
+      "label": "MCQ Scan company website (company context)",
+      "url": "https://mcq-scan.com/",
+      "kind": "profile"
+    }
+  ],
+  "metadata": {
+    "title": "Étude de cas IA en production MCQ Scan | Chakib Belgaid",
+    "description": "Responsabilité technique d’une plateforme no-code multi-agents, sorties LLM structurées et déploiement GCP."
+  },
+  sectionOrder: projectSectionOrder
+},
   whispbook: buildFrenchProject("whispbook"),
   wattch: buildFrenchProject("wattch"),
 };
@@ -402,10 +586,10 @@ export const siteContent = {
   en: {
     locale: "en",
     nav: { work: "Work", experience: "Experience", about: "About", garden: "Garden", cv: "CV", contact: "Contact", languageLabel: "Français" },
-    hero: { eyebrow: "Mohammed Chakib Belgaid, Ph.D.", title: "Full-stack Product Engineer for AI systems and developer tools.", summary: "Ph.D. in software engineering with 10+ years across product delivery, backend and applied AI, from founder-led mobile products to research-grade measurement infrastructure and production agent workflows.", primaryCta: "View selected work", secondaryCta: "Download CV", tertiaryCta: "Enter Systems Garden", evidenceIds: ["cvdb:career-timeline", "cvdb:mcq-agentic-ai-platform", "cvdb:phd-green-coding"] },
+    hero: { eyebrow: "Mohammed Chakib Belgaid, Ph.D.", title: "Applied AI Engineer building production LLM systems and developer tools.", summary: "I lead AI systems from workflow design to deployment: agent orchestration, structured outputs, model optimization and GCP delivery. Ph.D. in software engineering, with 10+ years across software and product delivery.", primaryCta: "View selected work", secondaryCta: "Download CV", tertiaryCta: "Enter Systems Garden", evidenceIds: ["cvdb:career-timeline", "cvdb:mcq-agentic-ai-platform", "cvdb:phd-green-coding"] },
     impact: impactEn,
     featuredHeading: "Selected work",
-    featuredIntro: "Two systems, each documented with architecture, trade-offs, current status and verifiable proof.",
+    featuredIntro: "Production AI at MCQ Scan, followed by two personal projects. Explore the case studies for architecture, decisions and evidence limits.",
     capabilities: [
       { id: "product-interfaces", title: "Product interfaces", items: ["Kotlin/Compose and React/TypeScript", "Workflow design", "Accessible, responsive UI"] },
       { id: "apis-backend", title: "APIs and backend", items: ["Python and FastAPI", "Storage and job orchestration", "Cloud deployment and CI/CD"] },
@@ -419,16 +603,16 @@ export const siteContent = {
       { id: "funecs", period: "2014–2018", title: "Co-founder / CTO", organization: "Funecs", summary: "Led product, engineering and client delivery for a serious-games advertising startup.", evidenceIds: ["cvdb:career-timeline", "cvdb:funecs-ooredoo-campaign"] },
     ],
     garden: { eyebrow: "Interactive lab", title: "Systems Garden", summary: "A separate creative-engineering experiment that turns systems concepts into a playable voxel world. It loads only when you choose to enter.", cta: "Enter the garden", languageNote: "The interactive experience is in English." },
-    contact: { heading: "Build something useful", summary: "For product engineering, applied AI or developer-tooling work, reach out directly.", emailLabel: "Email", githubLabel: "GitHub", linkedinLabel: "LinkedIn" },
-    metadata: { title: "Chakib Belgaid | Full-stack Product Engineer", description: "Full-stack product engineer building AI systems and developer tools. Selected work: Whisperbook Android and Wattch Core." },
+    contact: { heading: "Build something useful", summary: "Based in France. Seeking worldwide remote AI/software roles that allow me to remain in France, with no mandatory travel. English and French. Reach out directly.", emailLabel: "Email", githubLabel: "GitHub", linkedinLabel: "LinkedIn" },
+    metadata: { title: "Chakib Belgaid | Applied AI Engineer", description: "Applied AI engineer: production LLM workflows and GCP delivery at MCQ Scan, Whisperbook Android and Wattch Core." },
   },
   fr: {
     locale: "fr",
     nav: { work: "Projets", experience: "Expérience", about: "À propos", garden: "Jardin", cv: "CV", contact: "Contact", languageLabel: "English" },
-    hero: { eyebrow: "Mohammed Chakib Belgaid, Ph.D.", title: "Ingénieur produit full-stack pour les systèmes IA et les outils développeurs.", summary: "Docteur en génie logiciel avec plus de 10 ans entre produit, backend et IA appliquée, des applications mobiles portées comme fondateur aux infrastructures de mesure de niveau recherche et aux workflows d'agents en production.", primaryCta: "Voir les projets", secondaryCta: "Télécharger le CV", tertiaryCta: "Entrer dans Systems Garden", evidenceIds: ["cvdb:career-timeline", "cvdb:mcq-agentic-ai-platform", "cvdb:phd-green-coding"] },
+    hero: { eyebrow: "Mohammed Chakib Belgaid, Ph.D.", title: "Ingénieur en IA appliquée : systèmes LLM en production et outils développeurs.", summary: "Je pilote des systèmes IA du workflow au déploiement : orchestration d’agents, sorties structurées, optimisation de modèles et GCP. Docteur en génie logiciel, avec plus de 10 ans en développement logiciel et produit.", primaryCta: "Voir les projets", secondaryCta: "Télécharger le CV", tertiaryCta: "Entrer dans Systems Garden", evidenceIds: ["cvdb:career-timeline", "cvdb:mcq-agentic-ai-platform", "cvdb:phd-green-coding"] },
     impact: impactEn.map((metric) => ({ ...metric, label: metric.id === "latency" ? "Réduction de latence d'inférence" : metric.id === "nodes" ? "Déploiement PowerAPI" : "Téléchargements PyPI totaux de pyJoules", value: metric.id === "nodes" ? "100+ nœuds" : metric.value })),
     featuredHeading: "Projets sélectionnés",
-    featuredIntro: "Deux systèmes documentés par leur architecture, leurs compromis, leur état actuel et des preuves vérifiables.",
+    featuredIntro: "L’IA en production chez MCQ Scan, puis deux projets personnels. Les études de cas détaillent architecture, décisions et limites des preuves.",
     capabilities: [
       { id: "product-interfaces", title: "Interfaces produit", items: ["Kotlin/Compose et React/TypeScript", "Conception de workflows", "UI accessible et responsive"] },
       { id: "apis-backend", title: "API et backend", items: ["Python et FastAPI", "Stockage et orchestration de jobs", "Déploiement cloud et CI/CD"] },
@@ -442,8 +626,8 @@ export const siteContent = {
       { id: "funecs", period: "2014–2018", title: "Co-fondateur / CTO", organization: "Funecs", summary: "Direction produit, technique et client d'une startup de serious games publicitaires.", evidenceIds: ["cvdb:career-timeline", "cvdb:funecs-ooredoo-campaign"] },
     ],
     garden: { eyebrow: "Laboratoire interactif", title: "Systems Garden", summary: "Une expérience séparée de creative engineering qui transforme des concepts systèmes en monde voxel jouable. Elle ne se charge que si vous choisissez d'entrer.", cta: "Entrer dans le jardin", languageNote: "L'expérience interactive est en anglais." },
-    contact: { heading: "Construisons quelque chose d'utile", summary: "Pour des missions en ingénierie produit, IA appliquée ou outils développeurs, contactez-moi directement.", emailLabel: "E-mail", githubLabel: "GitHub", linkedinLabel: "LinkedIn" },
-    metadata: { title: "Chakib Belgaid | Ingénieur produit full-stack", description: "Ingénieur produit full-stack spécialisé en systèmes IA et outils développeurs. Projets : Whisperbook Android et Wattch Core." },
+    contact: { heading: "Construisons quelque chose d'utile", summary: "Basé en France. Je recherche un poste IA/logiciel en télétravail international permettant de rester en France, sans déplacement obligatoire. Anglais et français. Contactez-moi directement.", emailLabel: "E-mail", githubLabel: "GitHub", linkedinLabel: "LinkedIn" },
+    metadata: { title: "Chakib Belgaid | Ingénieur en IA appliquée", description: "Ingénieur en IA appliquée : workflows LLM et déploiement GCP chez MCQ Scan, Whisperbook Android et Wattch Core." },
   },
 } as const satisfies Record<Locale, PortfolioSiteContent>;
 

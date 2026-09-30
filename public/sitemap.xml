@@ -42,4 +42,16 @@
   <url>
     <loc>https://chakib-belgaid.github.io/ascii</loc>
   </url>
+  <url>
+    <loc>https://chakib-belgaid.github.io/work/mcq-scan</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.github.io/work/mcq-scan" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.github.io/fr/work/mcq-scan" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.github.io/work/mcq-scan" />
+  </url>
+  <url>
+    <loc>https://chakib-belgaid.github.io/fr/work/mcq-scan</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chakib-belgaid.github.io/work/mcq-scan" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://chakib-belgaid.github.io/fr/work/mcq-scan" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://chakib-belgaid.github.io/work/mcq-scan" />
+  </url>
 </urlset>

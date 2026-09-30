@@ -38,7 +38,7 @@ function jsonLdFor(
     "@type": "Person",
     name: "Chakib Belgaid",
     url: absoluteUrl("/live", origin),
-    jobTitle: route.locale === "fr" ? "Ingénieur produit full-stack" : "Full-stack Product Engineer",
+    jobTitle: route.locale === "fr" ? "Ingénieur en IA appliquée" : "Applied AI Engineer",
     sameAs: [
       "https://github.com/chakib-belgaid",
       "https://www.linkedin.com/in/chakib-belgaid"

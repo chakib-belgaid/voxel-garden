@@ -17,6 +17,8 @@ describe("static recruiter route contract", () => {
     expect(RECRUITER_ROUTES.map((route) => route.path)).toEqual([
       "/live",
       "/fr/live",
+      "/work/mcq-scan",
+      "/fr/work/mcq-scan",
       "/work/whispbook",
       "/fr/work/whispbook",
       "/work/wattch",
@@ -33,6 +35,8 @@ describe("static recruiter route contract", () => {
     expect(PUBLIC_SITEMAP_PATHS).toEqual([
       "/live",
       "/fr/live",
+      "/work/mcq-scan",
+      "/fr/work/mcq-scan",
       "/work/whispbook",
       "/fr/work/whispbook",
       "/work/wattch",

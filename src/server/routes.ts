@@ -48,6 +48,8 @@ export const RECRUITER_ROUTES = [
     alternate: HOME_ALTERNATES,
     socialImage: "/social/home-fr.svg"
   },
+  { path: "/work/mcq-scan", output: "work/mcq-scan/index.html", locale: "en", kind: "case-study", title: projects.en["mcq-scan"].metadata.title, description: projects.en["mcq-scan"].metadata.description, alternate: { en: "/work/mcq-scan", fr: "/fr/work/mcq-scan" }, socialImage: "/social/mcq-en.svg" },
+  { path: "/fr/work/mcq-scan", output: "fr/work/mcq-scan/index.html", locale: "fr", kind: "case-study", title: projects.fr["mcq-scan"].metadata.title, description: projects.fr["mcq-scan"].metadata.description, alternate: { en: "/work/mcq-scan", fr: "/fr/work/mcq-scan" }, socialImage: "/social/mcq-fr.svg" },
   {
     path: "/work/whispbook",
     output: "work/whispbook/index.html",
@@ -113,6 +115,8 @@ export type RecruiterRoutePath = (typeof RECRUITER_ROUTES)[number]["path"];
 export const PUBLIC_SITEMAP_PATHS = [
   "/live",
   "/fr/live",
+  "/work/mcq-scan",
+  "/fr/work/mcq-scan",
   "/work/whispbook",
   "/fr/work/whispbook",
   "/work/wattch",

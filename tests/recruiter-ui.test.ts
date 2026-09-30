@@ -13,16 +13,17 @@ describe("recruiter portfolio UI", () => {
 
     expect(screen.getByRole("heading", {
       level: 1,
-      name: "Full-stack Product Engineer for AI systems and developer tools."
+      name: "Applied AI Engineer building production LLM systems and developer tools."
     })).toBeTruthy();
-    expect(screen.getByText(/Ph\.D\. in software engineering with 10\+ years/)).toBeTruthy();
+    expect(screen.getByText(/Ph\.D\. in software engineering, with 10\+ years/)).toBeTruthy();
     expect(screen.getByText("60%")).toBeTruthy();
     expect(screen.getByText("100+ nodes")).toBeTruthy();
     expect(screen.getByText("98k")).toBeTruthy();
 
-    expect(screen.getAllByRole("link", { name: "Read case study" })).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: "Read case study" })).toHaveLength(3);
     const caseLinks = document.querySelectorAll<HTMLAnchorElement>('a[href^="/work/"]');
     expect([...caseLinks].map((link) => link.getAttribute("href"))).toEqual([
+      "/work/mcq-scan",
       "/work/whispbook",
       "/work/wattch"
     ]);
