@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { CarbonFootprint } from "../sustainability/CarbonFootprint";
 import {
   evidenceReferences,
@@ -143,18 +143,25 @@ function Header({
   readonly homeLinks?: boolean;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
   const copy = siteContent[locale];
   const homePath = getHomePath(locale);
   const sectionLink = (section: string) => homeLinks ? `${homePath}#${section}` : `#${section}`;
 
   return (
-    <header className="portfolio-header">
+    <header className="portfolio-header" onKeyDown={(event) => {
+      if (event.key === "Escape" && menuOpen) {
+        setMenuOpen(false);
+        menuButton.current?.focus();
+      }
+    }}>
       <div className="portfolio-shell portfolio-header__inner">
         <a className="portfolio-brand" href={homePath} aria-label="Chakib Belgaid — portfolio home">
           CHAKIB BELGAID
         </a>
         <button
           className="portfolio-nav-toggle"
+          ref={menuButton}
           type="button"
           aria-expanded={menuOpen}
           aria-controls="portfolio-navigation"
@@ -162,7 +169,9 @@ function Header({
         >
           {menuOpen ? ui[locale].close : ui[locale].menu}
         </button>
-        <nav id="portfolio-navigation" className="portfolio-nav" data-open={menuOpen} aria-label="Primary">
+        <nav id="portfolio-navigation" className="portfolio-nav" data-open={menuOpen} aria-label={locale === "en" ? "Primary" : "Navigation principale"} onClick={(event) => {
+          if ((event.target as HTMLElement).closest("a")) setMenuOpen(false);
+        }}>
           <a href={sectionLink("work")}>{copy.nav.work}</a>
           <a href={sectionLink("experience")}>{copy.nav.experience}</a>
           <a href={sectionLink("about")}>{copy.nav.about}</a>
@@ -235,10 +244,13 @@ function ProjectRow({ locale, project, index }: {
 
   return (
     <article className="portfolio-work-row">
-      <div>
+      <div className="portfolio-work-row__body">
         <span className="portfolio-work-row__index">{String(index + 1).padStart(2, "0")}</span>
         <h3>{project.name}</h3>
         <p className="portfolio-work-row__summary">{project.summary}</p>
+        <a className="portfolio-text-link portfolio-work-row__action" href={getProjectPath(locale, project.slug)}>
+          {ui[locale].readCase} <Arrow />
+        </a>
       </div>
       <dl className="portfolio-work-row__meta">
         <div>
@@ -246,18 +258,11 @@ function ProjectRow({ locale, project, index }: {
           <dd>{project.role}</dd>
         </div>
         <div>
-          <dt>{locale === "en" ? "Architecture" : "Architecture"}</dt>
-          <dd>{project.architecture.overview}</dd>
-        </div>
-        <div>
           <dt>{locale === "en" ? "Technology" : "Technologies"}</dt>
           <dd>{technology}</dd>
         </div>
       </dl>
       {media ? <MediaFrame media={media} featured /> : null}
-      <a className="portfolio-text-link portfolio-work-row__action" href={getProjectPath(locale, project.slug)}>
-        {ui[locale].readCase} <Arrow />
-      </a>
     </article>
   );
 }
