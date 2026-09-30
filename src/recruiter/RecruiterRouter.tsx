@@ -185,6 +185,9 @@ function Header({
           </a>
         </nav>
       </div>
+      <div className="portfolio-shell portfolio-utility">
+        <CarbonFootprint locale={locale} />
+      </div>
     </header>
   );
 }
@@ -245,7 +248,7 @@ function ProjectRow({ locale, project, index }: {
   return (
     <article className="portfolio-work-row">
       <div className="portfolio-work-row__body">
-        <span className="portfolio-work-row__index">{String(index + 1).padStart(2, "0")}</span>
+        <span className="portfolio-work-row__index">{String(index + 1).padStart(2, "0")} / {project.eyebrow}</span>
         <h3>{project.name}</h3>
         <p className="portfolio-work-row__summary">{project.summary}</p>
         <a className="portfolio-text-link portfolio-work-row__action" href={getProjectPath(locale, project.slug)}>
@@ -573,7 +576,6 @@ export function RecruiterRouter({ route }: RecruiterRouterProps) {
       {parsed.kind === "home" ? <HomePage locale={parsed.locale} /> : null}
       {parsed.kind === "project" ? <ProjectPage locale={parsed.locale} slug={parsed.slug} /> : null}
       {parsed.kind === "not-found" ? <NotFoundPage locale={parsed.locale} /> : null}
-      <CarbonFootprint locale={parsed.locale} />
     </div>
   );
 }

@@ -82,8 +82,7 @@ body:has(.portfolio-site) {
 }
 
 .portfolio-header {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 20;
   border-bottom: 1px solid var(--portfolio-rule);
   background: rgba(2, 11, 14, 0.96);
@@ -152,7 +151,7 @@ body:has(.portfolio-site) {
   display: grid;
   min-height: 390px;
   align-content: center;
-  padding-block: clamp(48px, 6vw, 80px) 44px;
+  padding-block: clamp(44px, 5vw, 64px) 40px;
 }
 
 .portfolio-hero__name {
@@ -163,10 +162,10 @@ body:has(.portfolio-site) {
 }
 
 .portfolio-hero h1 {
-  max-width: 940px;
+  max-width: 1100px;
   margin: 0;
   color: var(--portfolio-text);
-  font: 650 clamp(36px, 4.8vw, 62px)/1.1 var(--portfolio-font);
+  font: 650 clamp(36px, 4.4vw, 56px)/1.1 var(--portfolio-font);
   letter-spacing: -0.04em;
   text-wrap: balance;
 }
@@ -675,7 +674,7 @@ body:has(.portfolio-site) {
 
 .portfolio-case-layout__aside {
   position: sticky;
-  top: 104px;
+  top: 32px;
   align-self: start;
 }
 
@@ -698,7 +697,7 @@ body:has(.portfolio-site) {
 
 .portfolio-case-section {
   padding: 0 0 clamp(74px, 9vw, 110px);
-  scroll-margin-top: 104px;
+  scroll-margin-top: 32px;
 }
 
 .portfolio-case-section h2 {
@@ -1025,25 +1024,46 @@ body:has(.portfolio-site) {
 .portfolio-contact-links a, .portfolio-proof-links a { min-height: 44px; display: inline-flex; align-items: center; gap: 10px; font-size: 15px; }
 .portfolio-case-layout__aside a { min-height: 44px; line-height: 1.5; }
 .portfolio-capability li { margin-bottom: 8px; }
-.portfolio-footer__inner { padding-bottom: 148px; }
+.portfolio-footer__inner { padding-bottom: 34px; }
 .portfolio-media-grid .portfolio-media--portrait img { aspect-ratio: 9 / 16; }
 
-/* Dock the estimate below the reading area on small screens. */
-@media (max-width: 700px) {
-  .portfolio-site .carbon-footprint-meter {
-    top: auto;
-    right: max(10px, env(safe-area-inset-right, 0px));
-    bottom: max(10px, env(safe-area-inset-bottom, 0px));
-    width: min(300px, calc(100vw - 20px));
-    display: flex;
-    flex-direction: column;
-  }
-  .portfolio-site .carbon-footprint-panel {
-    max-height: calc(100dvh - 200px);
-    overflow-y: auto;
-    margin-top: 0;
-    margin-bottom: 9px;
-  }
-  .portfolio-site .experience-mode-switch a { min-height: 44px; }
-  .portfolio-site .carbon-footprint-toggle { min-width: 0; }
+/* A dedicated utility strip keeps modes and estimates available without covering text. */
+.portfolio-utility { padding-block: 12px; border-top: 1px solid var(--portfolio-rule); }
+.portfolio-site .carbon-footprint-meter {
+  position: static;
+  width: 100%;
+  display: block;
+  pointer-events: auto;
 }
+.portfolio-site .carbon-footprint-controls {
+  grid-template-columns: minmax(260px, 390px) minmax(200px, 260px);
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.portfolio-site .experience-mode-switch { min-width: 0; }
+.portfolio-site .experience-mode-switch a { min-height: 44px; font-size: 11px; }
+.portfolio-site .experience-mode-switch a small { font-size: 10px; }
+.portfolio-site .carbon-footprint-toggle { min-width: 0; min-height: 44px; box-shadow: none; }
+.portfolio-site .carbon-footprint-toggle strong { font: 600 16px/1.2 var(--font-mono); }
+.portfolio-site .carbon-footprint-toggle small { font-size: 9px; }
+.portfolio-site .carbon-footprint-panel { width: min(100%, 540px); margin: 0 0 12px auto; box-shadow: none; }
+.portfolio-work-row:not(:has(.portfolio-media)) .portfolio-work-row__meta {
+  grid-column: 2;
+  grid-row: 1;
+  padding: 28px;
+  border-left: 2px solid var(--portfolio-lime);
+  background: var(--portfolio-surface);
+}
+.portfolio-work-row__meta { grid-template-columns: 1fr; }
+@media (max-width: 700px) {
+  .portfolio-site .carbon-footprint-controls { grid-template-columns: 1fr; gap: 8px; }
+  .portfolio-site .carbon-footprint-panel { margin: 0 0 12px; }
+  .portfolio-work-row:not(:has(.portfolio-media)) .portfolio-work-row__meta { grid-column: 1; grid-row: auto; }
+}
+
+@media (min-width: 701px) and (max-width: 960px) {
+  .portfolio-decision { grid-template-columns: 1fr; gap: 16px; }
+}
+.portfolio-media--landscape img { object-fit: contain; }
+.portfolio-site .experience-mode-switch a > small { color: inherit; opacity: 1; }
